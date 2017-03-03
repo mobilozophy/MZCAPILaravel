@@ -8,6 +8,11 @@
             "email": "jwray@mobilozophy.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Mobilozophy\\MZCAPILaravel\\": "src/"
+        }
+    },
     "minimum-stability": "dev",
     "require": {}
 }
