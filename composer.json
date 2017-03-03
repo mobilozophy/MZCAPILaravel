@@ -1,0 +1,13 @@
+{
+    "name": "mobilozophy/MZCAPILaravel",
+    "description": "Mobilozophy - mzCONNECT API",
+    "license": "Proprietary",
+    "authors": [
+        {
+            "name": "Jeffrey Wray",
+            "email": "jwray@mobilozophy.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
