@@ -1,14 +1,16 @@
 <?php
 
-namespace Mobilozophy\MZCAPILaravel\Services\Api\MZCAPI\MessageCenter;
+namespace Mobilozophy\MZCAPILaravel\Services\Api\MessageCenter;
 
 
 use Mobilozophy\MZCAPILaravel\Services\Api\AbstractAPIService;
 use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
+use Mobilozophy\MZCAPILaravel\Services\ServiceActionException;
+//use Log;
 
-class TriggeredSendProfileAPIService extends AbstractAPIService
+class MessageTemplateAPIService extends AbstractAPIService
 {
-    const ENDPOINT = 'message-center/triggered-send-profile';
+    const ENDPOINT = 'message-center/message-templates';
 
     /**
      * Send a request to add a new list.
@@ -42,6 +44,7 @@ class TriggeredSendProfileAPIService extends AbstractAPIService
         $requestUrl = $this->getEndpointRequestUrl($id);
 
         return $this->httpClient->put($requestUrl, [
+            'headers' => $credentials->getHeaders(),
             'auth' => $credentials->toArray(),
             'query' => $data
         ]);
@@ -110,7 +113,7 @@ class TriggeredSendProfileAPIService extends AbstractAPIService
             $segments = implode('/', $segments);
         }
 
-        $baseUrl = env('MZCAPI_BASEURL');
+        $baseUrl = config('services.mz_v2_api.url');
 
         return $baseUrl . '/' . $segments;
     }

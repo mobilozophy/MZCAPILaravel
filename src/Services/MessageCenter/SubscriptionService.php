@@ -2,24 +2,24 @@
 
 namespace Mobilozophy\MZCAPILaravel\Services\MZCAPI\MessageCenter;
 
-use Mobilozophy\MZCAPILaravel\Services\Api\MZCAPI\MessageCenter\DeviceAPIService;
+use Mobilozophy\MZCAPILaravel\Services\Api\MZCAPI\MessageCenter\SubscriptionAPIService;
 use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
 use Mobilozophy\MZCAPILaravel\Services\UsesCredentialsTrait;
 
-class DeviceService
+class SubscriptionService
 {
     use UsesCredentialsTrait;
 
-    private $deviceApiService;
+    private $subscriptionApiService;
 
 
     /**
-     * @param App\Services\Api\DeviceAPIService $keywordApiService
+     * @param Mobilozophy\MZCAPILaravel\Services\Api\SubscriptionAPIService $keywordApiService
      */
     public function __construct(
-        DeviceAPIService $deviceApiService
+        SubscriptionAPIService $subscriptionAPIService
     ) {
-        $this->deviceApiService = $deviceApiService;
+        $this->subscriptionApiService = $subscriptionAPIService;
     }
 
     /**
@@ -30,15 +30,9 @@ class DeviceService
     public function add(array $data)
     {
 
-        $response = $this->deviceApiService->add(
+        $response = $this->subscriptionApiService->add(
             $this->getSubAccountCredentials(), $data
         );
-        if ($response->getStatusCode() == 200) {
-            return $response->getBody()->getContents();
-        } else
-        {
-            return false;
-        }
     }
 
 
@@ -50,16 +44,12 @@ class DeviceService
      */
     public function get($id)
     {
-        try {
-            $response = $this->deviceApiService->get(
-                $this->getSubAccountCredentials(), $id
-            );
-            if ($response->getStatusCode() == 200) {
-                return $response->getBody()->getContents();
-            } else {
-                return false;
-            }
-        } catch (\Exception $e)
+        $response = $this->subscriptionApiService->get(
+            $this->getSubAccountCredentials(), $id
+        );
+        if ($response->getStatusCode() == 200) {
+            return $response->getBody()->getContents();
+        } else
         {
             return false;
         }
@@ -70,7 +60,7 @@ class DeviceService
      */
     public function getall()
     {
-        $response = $this->deviceApiService->getAll(
+        $response = $this->subscriptionApiService->getAll(
             $this->getSubAccountCredentials()
         );
         if ($response->getStatusCode() == 200) {
@@ -83,7 +73,7 @@ class DeviceService
 
     public function delete($id)
     {
-        $response = $this->deviceApiService->delete(
+        $response = $this->subscriptionApiService->delete(
             $this->getSubAccountCredentials(), $id
         );
         if ($response->getStatusCode() == 200) {

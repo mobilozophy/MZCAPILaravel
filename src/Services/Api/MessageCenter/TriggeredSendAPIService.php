@@ -1,6 +1,6 @@
 <?php
 
-namespace Mobilozophy\MZCAPILaravel\Services\Api\MZCAPI\MessageCenter;
+namespace Mobilozophy\MZCAPILaravel\Services\Api\MessageCenter;
 
 use Mobilozophy\MZCAPILaravel\Services\Api\AbstractAPIService;
 use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
