@@ -9,9 +9,10 @@ use Mobilozophy\MZCAPILaravel\Services\Api\MessageCenter\SMSPushAPIService;
 use Mobilozophy\MZCAPILaravel\Services\Api\TrakBeaconAPIService;
 use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
 use Mobilozophy\MZCAPILaravel\Services\ServiceActionException;
+use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
 use Mobilozophy\MZCAPILaravel\Services\UsesCredentialsTrait;
 
-class SMSPushService
+class SMSPushService extends ServiceBase
 {
     use UsesCredentialsTrait;
 
@@ -90,36 +91,5 @@ class SMSPushService
         return $this->SMSPushAPIService->delete(
             $this->getSubAccountCredentials(), $id
         )->json();
-    }
-
-
-    public function getSubAccountCredentials()
-    {
-        //This function needs to replace the config user names and PW with the
-        //API credentials found in the database. Also need merchant_ID stored somewhere
-        //reliable during this execution.
-        try{
-            $mr  = new MerchantsRepository(new Merchant());
-            $wlr  = new WhiteLabelersRepository(new WhiteLabeler());
-            $ams = new ActiveMerchantService($mr, new AbilityService($mr, $wlr));
-
-            $am = $ams->getActiveMerchant();
-
-        }catch(Exception $e)
-        {
-            return false;
-        }
-
-        $deets = Merchant::where('_kf_Merchant_ID', '=', $am->_kf_Merchant_ID)->first();
-
-        return new Credentials(
-            $deets->v2_token_name,//config('services.trak_beacon.username'),
-            $deets->v2_token_pass,//config('services.trak_beacon.password')
-            [
-                'Accept'=>'application/vnd.mzcapi.v2+json',
-                'MZAccount'=>$deets->v2_token_account_id
-            ]
-        );
-
     }
 }

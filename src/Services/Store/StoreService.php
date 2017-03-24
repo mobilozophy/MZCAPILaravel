@@ -1,27 +1,27 @@
 <?php
 
-namespace Mobilozophy\MZCAPILaravel\Services\Account;
+namespace Mobilozophy\MZCAPILaravel\Services\Store;
 
 use Mobilozophy\MZCAPILaravel\Services\Api\Account\AccountAPIService;
+use Mobilozophy\MZCAPILaravel\Services\Api\Store\StoreAPIService;
 use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
 use Mobilozophy\MZCAPILaravel\Services\UsesCredentialsTrait;
 
-class AccountService extends ServiceBase
+class StoreService extends ServiceBase
 {
     use UsesCredentialsTrait;
 
-    private $accountApiService;
+    private $storeApiService;
 
 
     /**
      * AccountService constructor.
      *
-     * @param AccountAPIService $accountAPIService
      */
     public function __construct(
-        AccountAPIService $accountAPIService
+        StoreAPIService $storeAPIService
     ) {
-        $this->accountApiService = $accountAPIService;
+        $this->storeApiService = $storeAPIService;
     }
 
     /**
@@ -29,11 +29,11 @@ class AccountService extends ServiceBase
      *
      * @return bool
      */
-    public function add(array $data)
+    public function add(array $data, $account_uuid = null)
     {
 
-        $response = $this->accountApiService->add(
-            $this->getSubAccountCredentials(), $data
+        $response = $this->storeApiService->add(
+            $this->getSubAccountCredentials($account_uuid), $data
         );
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
@@ -49,11 +49,11 @@ class AccountService extends ServiceBase
      *
      * @return bool
      */
-    public function get($id)
+    public function get($id,$account_uuid = null)
     {
         try {
-            $response = $this->accountApiService->get(
-                $this->getSubAccountCredentials(), $id
+            $response = $this->storeApiService->get(
+                $this->getSubAccountCredentials($account_uuid), $id
             );
             if ($response->getStatusCode() == 200) {
                 return $response->getBody()->getContents();
@@ -69,10 +69,10 @@ class AccountService extends ServiceBase
     /**
      * @return bool
      */
-    public function getall()
+    public function getall($account_uuid = null)
     {
-        $response = $this->accountApiService->getAll(
-            $this->getSubAccountCredentials()
+        $response = $this->storeApiService->getAll(
+            $this->getSubAccountCredentials($account_uuid)
         );
         if ($response->getStatusCode() == 200) {
             return $response->getBody()->getContents();
@@ -87,10 +87,10 @@ class AccountService extends ServiceBase
      *
      * @return bool
      */
-    public function delete($id)
+    public function delete($id, $account_uuid = null)
     {
-        $response = $this->accountApiService->delete(
-            $this->getSubAccountCredentials(), $id
+        $response = $this->storeApiService->delete(
+            $this->getSubAccountCredentials($account_uuid), $id
         );
         if ($response->getStatusCode() == 200) {
             return $response->getBody()->getContents();

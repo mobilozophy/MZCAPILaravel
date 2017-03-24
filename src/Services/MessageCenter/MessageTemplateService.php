@@ -8,9 +8,10 @@ use Mobilozophy\MZCAPILaravel\Services\Api\MessageCenter\MessageTemplateAPIServi
 use Mobilozophy\MZCAPILaravel\Services\Api\TrakBeaconAPIService;
 use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
 use Mobilozophy\MZCAPILaravel\Services\ServiceActionException;
+use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
 use Mobilozophy\MZCAPILaravel\Services\UsesCredentialsTrait;
 
-class MessageTemplateService
+class MessageTemplateService extends ServiceBase
 {
     use UsesCredentialsTrait;
 
@@ -84,16 +85,4 @@ class MessageTemplateService
         )->json();
     }
 
-
-    public function getSubAccountCredentials()
-    {
-        return new Credentials(
-            env('MZCAPI_USER'),
-            env('MZCAPI_PASS'),
-            [
-                'Accept'=>'application/vnd.mzcapi.v2+json',
-                'MZAccount'=>env('MZCAPI_ACCT')
-            ]
-        );
-    }
 }

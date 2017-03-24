@@ -1,13 +1,13 @@
 <?php
 
-namespace Mobilozophy\MZCAPILaravel\Services\Api\Account;
+namespace Mobilozophy\MZCAPILaravel\Services\Api\Store;
 
 use Mobilozophy\MZCAPILaravel\Services\Api\AbstractAPIService;
 use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
 
-class AccountAPIService extends AbstractAPIService
+class StoreAPIService extends AbstractAPIService
 {
-    const ENDPOINT = 'accounts';
+    const ENDPOINT = 'stores';
 
     /**
      * Send a request to add a new store.

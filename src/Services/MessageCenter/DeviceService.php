@@ -4,9 +4,10 @@ namespace Mobilozophy\MZCAPILaravel\Services\MZCAPI\MessageCenter;
 
 use Mobilozophy\MZCAPILaravel\Services\Api\MessageCenter\DeviceAPIService;
 use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
+use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
 use Mobilozophy\MZCAPILaravel\Services\UsesCredentialsTrait;
 
-class DeviceService
+class DeviceService extends ServiceBase
 {
     use UsesCredentialsTrait;
 
@@ -94,16 +95,4 @@ class DeviceService
         }
     }
 
-
-    public function getSubAccountCredentials()
-    {
-        return new Credentials(
-            env('MZCAPI_USER'),
-            env('MZCAPI_PASS'),
-            [
-                'Accept'=>'application/vnd.mzcapi.v2+json',
-                'MZAccount'=>env('MZCAPI_ACCT')
-            ]
-        );
-    }
 }

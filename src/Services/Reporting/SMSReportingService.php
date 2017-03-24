@@ -6,9 +6,10 @@ use Mobilozophy\MZCAPILaravel\Services\AbilityService;
 use Mobilozophy\MZCAPILaravel\Services\ActiveMerchantService;
 use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
 use Mobilozophy\MZCAPILaravel\Services\Api\Reporting\SMSReportingAPIService;
+use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
 use Mobilozophy\MZCAPILaravel\Services\UsesCredentialsTrait;
 
-class SMSReportingService
+class SMSReportingService extends ServiceBase
 {
     use UsesCredentialsTrait;
 
@@ -45,15 +46,4 @@ class SMSReportingService
 
 
 
-    public function getSubAccountCredentials()
-    {
-        return new Credentials(
-            env('MZCAPI_USER'),
-            env('MZCAPI_PASS'),
-            [
-                'Accept'=>'application/vnd.mzcapi.v2+json',
-                'MZAccount'=>env('MZCAPI_ACCT')
-            ]
-        );
-    }
 }

@@ -35,6 +35,8 @@ class MZCAPIServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // Account
+
         $this->app->bind('Mobilozophy\MZCAPILaravel\Services\Api\MZCAPI\MessageCenter\DeviceAPIService', function () {
             return new DeviceAPIService($this->app['GuzzleHttp\Client']);
         });
@@ -56,6 +58,9 @@ class MZCAPIServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
+            // Account
+            'Mobilozophy\MZCAPILaravel\Service\Api\MZCAPI\Account\AccountAPI\Service',
+            // Message Center
             'Mobilozophy\MZCAPILaravel\Services\Api\MZCAPI\MessageCenter\DeviceAPIService',
             'Mobilozophy\MZCAPILaravel\Services\Api\MZCAPI\MessageCenter\SubscriptionAPIService',
             'Mobilozophy\MZCAPILaravel\Services\Api\MZCAPI\MessageCenter\TriggeredSendAPIService',

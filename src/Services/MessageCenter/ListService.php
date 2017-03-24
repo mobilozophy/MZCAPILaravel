@@ -7,9 +7,10 @@ use Mobilozophy\MZCAPILaravel\Services\ActiveMerchantService;
 use Mobilozophy\MZCAPILaravel\Services\Api\MessageCenter\ListAPIService;
 use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
 use Mobilozophy\MZCAPILaravel\Services\ServiceActionException;
+use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
 use Mobilozophy\MZCAPILaravel\Services\UsesCredentialsTrait;
 
-class ListService
+class ListService extends ServiceBase
 {
     use UsesCredentialsTrait;
 
@@ -83,16 +84,4 @@ class ListService
         )->json();
     }
 
-
-    public function getSubAccountCredentials()
-    {
-        return new Credentials(
-            env('MZCAPI_USER'),
-            env('MZCAPI_PASS'),
-            [
-                'Accept'=>'application/vnd.mzcapi.v2+json',
-                'MZAccount'=>env('MZCAPI_ACCT')
-            ]
-        );
-    }
 }

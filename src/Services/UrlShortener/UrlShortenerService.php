@@ -7,9 +7,10 @@ use Mobilozophy\MZCAPILaravel\Services\ActiveMerchantService;
 use Mobilozophy\MZCAPILaravel\Services\Api\MessageCenter\CodeAPIService;
 use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
 use Mobilozophy\MZCAPILaravel\Services\Api\UrlShortener\UrlShortenerAPIService;
+use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
 use Mobilozophy\MZCAPILaravel\Services\UsesCredentialsTrait;
 
-class UrlShortenerService
+class UrlShortenerService extends ServiceBase
 {
     use UsesCredentialsTrait;
 
@@ -35,16 +36,4 @@ class UrlShortenerService
         )->json();
     }
 
-
-    public function getSubAccountCredentials()
-    {
-        return new Credentials(
-            env('MZCAPI_USER'),
-            env('MZCAPI_PASS'),
-            [
-                'Accept'=>'application/vnd.mzcapi.v2+json',
-                'MZAccount'=>env('MZCAPI_ACCT')
-            ]
-        );
-    }
 }
