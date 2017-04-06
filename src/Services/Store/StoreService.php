@@ -43,6 +43,25 @@ class StoreService extends ServiceBase
         }
     }
 
+    /**
+     * @param array $data
+     *
+     * @return bool
+     */
+    public function update($id, array $data, $account_uuid = null)
+    {
+
+        $response = $this->storeApiService->update(
+            $this->getSubAccountCredentials($account_uuid), $id, $data, $account_uuid
+        );
+        if ($response->getStatusCode() == 200) {
+            return json_decode($response->getBody()->getContents());
+        } else
+        {
+            return false;
+        }
+    }
+
 
     /**
      * @param $id

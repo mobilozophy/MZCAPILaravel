@@ -30,6 +30,25 @@ class StoreAPIService extends AbstractAPIService
     }
 
     /**
+     * Send a request ti update a store
+     * @param Credentials $credentials
+     * @param             $accountId
+     * @param array       $params
+     *
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function update(Credentials $credentials, $id, array $params, $accountId )
+    {
+        $requestUrl = $this->getEndpointRequestUrl($id);
+
+        return $this->httpClient->put($requestUrl, [
+            'headers' => $credentials->getHeaders(),
+            'auth' => $credentials->toArray(),
+            'form_params' => $params
+        ]);
+    }
+
+    /**
      * Send a request to retrieve a store.
      *
      * @param Credentials $credentials
