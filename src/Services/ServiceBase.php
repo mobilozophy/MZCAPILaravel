@@ -4,7 +4,126 @@ use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
 
 class ServiceBase
 {
+    use UsesCredentialsTrait;
+
+    protected $apiService;
+
+
     /**
+     * Add - POST
+     * @param array $data
+     * @param null  $account_uuid
+     *
+     * @return bool|mixed
+     */
+    public function add(array $data, $account_uuid = null)
+    {
+
+        $response = $this->apiService->add(
+            $this->getSubAccountCredentials($account_uuid), $data
+        );
+        if ($response->getStatusCode() == 200) {
+            return json_decode($response->getBody()->getContents());
+        } else
+        {
+            return false;
+        }
+    }
+
+
+    /**
+     * Update - PUT
+     * @param       $id
+     * @param array $data
+     * @param null  $account_uuid
+     *
+     * @return bool|mixed
+     */
+    public function update($id, array $data, $account_uuid = null)
+    {
+
+        $response = $this->apiService->update(
+            $this->getSubAccountCredentials($account_uuid), $id, $data, $account_uuid
+        );
+        if ($response->getStatusCode() == 200) {
+            return json_decode($response->getBody()->getContents());
+        } else
+        {
+            return false;
+        }
+    }
+
+
+    /**
+     * Get - GET by ID
+     * @param      $id
+     * @param null $account_uuid
+     *
+     * @return bool
+     */
+    public function get($id,$account_uuid = null)
+    {
+        try {
+            $response = $this->apiService->get(
+                $this->getSubAccountCredentials($account_uuid), $id
+            );
+            if ($response->getStatusCode() == 200) {
+                return $response->getBody()->getContents();
+            } else {
+                return false;
+            }
+        } catch (\Exception $e)
+        {
+            return false;
+        }
+    }
+
+
+    /**
+     * Get All - GET All
+     * @param null $account_uuid
+     *
+     * @return bool
+     */
+    public function getall($account_uuid = null)
+    {
+        $response = $this->apiService->getAll(
+            $this->getSubAccountCredentials($account_uuid)
+        );
+        if ($response->getStatusCode() == 200) {
+            return $response->getBody()->getContents();
+        } else
+        {
+            return false;
+        }
+    }
+
+
+    /**
+     * Delete - DELETE
+     * @param      $id
+     * @param null $account_uuid
+     *
+     * @return bool
+     */
+    public function delete($id, $account_uuid = null)
+    {
+        $response = $this->apiService->delete(
+            $this->getSubAccountCredentials($account_uuid), $id
+        );
+        if ($response->getStatusCode() == 200) {
+            return $response->getBody()->getContents();
+        } else
+        {
+            return false;
+        }
+    }
+
+
+    /**
+     *
+     * @param null $account
+     *
      * @return Credentials
      */
     public function getSubAccountCredentials($account = null)
@@ -19,5 +138,15 @@ class ServiceBase
                 'MZAccount' => $account
             ]
         );
+    }
+
+    protected function handleErrorException($exception)
+    {
+        $responseBody = $exception->getResponse()->getBody()->getContents();
+        $exceptionCode = $exception->getCode();
+        $responseJsonDecode = json_decode($responseBody,true);
+        unset($responseJsonDecode['error']['debug']);
+        return json_encode($responseJsonDecode);
+
     }
 }

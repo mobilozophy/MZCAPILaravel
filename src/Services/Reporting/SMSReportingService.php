@@ -11,10 +11,6 @@ use Mobilozophy\MZCAPILaravel\Services\UsesCredentialsTrait;
 
 class SMSReportingService extends ServiceBase
 {
-    use UsesCredentialsTrait;
-
-    private $smsReportingAPIService;
-
 
     public function __construct(
         SMSReportingAPIService $smsReportingAPIService
