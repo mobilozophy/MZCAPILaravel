@@ -126,17 +126,25 @@ class ServiceBase
      *
      * @return Credentials
      */
-    public function getSubAccountCredentials($account = null)
+    public function getSubAccountCredentials($account = null, $scope = false)
     {
         $account = (null != $account) ? $account : env('MZCAPI_ACCT');
+
+        $headers =             [
+            'Accept'    => 'application/vnd.mzcapi.v2+json',
+            'MZAccount' => $account
+        ];
+
+        if($scope)
+        {
+            $headers['MZScope'] = $scope;
+        }
 
         return new Credentials(
             env('MZCAPI_USER'),
             env('MZCAPI_PASS'),
-            [
-                'Accept'    => 'application/vnd.mzcapi.v2+json',
-                'MZAccount' => $account
-            ]
+            $headers
+
         );
     }
 
