@@ -126,7 +126,7 @@ class ServiceBase
      *
      * @return Credentials
      */
-    public function getSubAccountCredentials($account = null, $scope = false)
+    public function getSubAccountCredentials($account = null, $scope = false, $otherHeaders = array())
     {
         $account = (null != $account) ? $account : env('MZCAPI_ACCT');
 
@@ -139,6 +139,8 @@ class ServiceBase
         {
             $headers['MZScope'] = $scope;
         }
+
+        $headers = array_merge($headers, $otherHeaders);
 
         return new Credentials(
             env('MZCAPI_USER'),
