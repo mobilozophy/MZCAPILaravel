@@ -82,6 +82,15 @@ class StoreAPIService extends AbstractAPIService
         ]);
     }
 
+    public function getLoyaltyByLocation(Credentials $credentials, $lat, $lon, $rad, $measurement='miles',$accountId)
+    {
+        $requestUrl = $this->getEndpointRequestUrl($accountId).'/scope/loyalty/'.$lat.'/'.$lon.'/'.$rad;
+        return $this->httpClient->get($requestUrl, [
+            'headers' => $credentials->getHeaders(),
+            'auth' => $credentials->toArray()
+        ]);
+    }
+
 
     /**
      * Send a request to retrieve all stores.
