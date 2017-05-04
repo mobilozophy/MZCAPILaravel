@@ -68,7 +68,7 @@ class ServiceBase
                 $this->getSubAccountCredentials($account_uuid,$scope), $id
             );
             if ($response->getStatusCode() == 200) {
-                return $response->getBody()->getContents();
+                return json_decode($response->getBody()->getContents());
             } else {
                 return false;
             }
@@ -91,7 +91,7 @@ class ServiceBase
             $this->getSubAccountCredentials($account_uuid,$scope)
         );
         if ($response->getStatusCode() == 200) {
-            return $response->getBody()->getContents();
+            return json_decode($response->getBody()->getContents());
         } else
         {
             return false;
@@ -112,7 +112,7 @@ class ServiceBase
             $this->getSubAccountCredentials($account_uuid,$scope), $id
         );
         if ($response->getStatusCode() == 200) {
-            return $response->getBody()->getContents();
+            return json_decode($response->getBody()->getContents());
         } else
         {
             return false;
