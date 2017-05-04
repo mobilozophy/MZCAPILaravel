@@ -34,4 +34,18 @@ class RegistrationService extends ServiceBase
         }
     }
 
+    public function loginWithMerchantIdentifier(array $data, $account_uuid = null)
+    {
+
+        $response = $this->apiService->loginWithMerchantIdentifier(
+            $this->getSubAccountCredentials($account_uuid), $data
+        );
+        if ($response->getStatusCode() == 200) {
+            return json_decode($response->getBody()->getContents());
+        } else
+        {
+            return false;
+        }
+    }
+
 }

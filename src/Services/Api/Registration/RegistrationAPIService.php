@@ -22,5 +22,17 @@ class RegistrationAPIService extends MZCAPIAPIService
 
     }
 
+    public function loginWithMerchantIdentifier(Credentials $credentials, array $params)
+    {
+        $requestUrl = $this->getEndpointRequestUrl().'/login/merchant_identifier';
+
+        return $this->httpClient->post($requestUrl, [
+            'headers'     => $credentials->getHeaders(),
+            'auth'        => $credentials->toArray(),
+            'form_params' => $params
+        ]);
+
+    }
+
 
 }
