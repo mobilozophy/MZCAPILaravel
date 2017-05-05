@@ -16,11 +16,11 @@ class StoreService extends ServiceBase
         $this->apiService = $storeAPIService;
     }
 
-    public function getByLocation($lat, $lon, $rad, $measurement= 'miles', $account_uuid = null, $scope = false)
+    public function getByLocation($lat, $lon, $rad, $measurement= 'miles', $include = null,$account_uuid = null, $scope = false)
     {
         try {
             $response = $this->apiService->getByLocation(
-                $this->getSubAccountCredentials($account_uuid,$scope), $lat, $lon, $rad, $measurement, $account_uuid
+                $this->getSubAccountCredentials($account_uuid,$scope), $lat, $lon, $rad, $measurement, $include, $account_uuid
             );
             if ($response->getStatusCode() == 200) {
                 return $response->getBody()->getContents();

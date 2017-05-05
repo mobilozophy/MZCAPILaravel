@@ -64,9 +64,9 @@ class StoreAPIService extends AbstractAPIService
         ]);
     }
 
-    public function getByLocation(Credentials $credentials, $lat, $lon, $rad, $measurement='miles',$accountId)
+    public function getByLocation(Credentials $credentials, $lat, $lon, $rad, $measurement='miles', $include=null,$accountId)
     {
-        $requestUrl = $this->getEndpointRequestUrl($accountId).'/'.$lat.'/'.$lon.'/'.$rad;
+        $requestUrl = $this->getEndpointRequestUrl($accountId).'/'.$lat.'/'.$lon.'/'.$rad.(!is_null($include)?"?include=$include":'');
         return $this->httpClient->get($requestUrl, [
             'headers' => $credentials->getHeaders(),
             'auth' => $credentials->toArray()
