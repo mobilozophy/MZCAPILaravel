@@ -73,23 +73,35 @@ class StoreAPIService extends AbstractAPIService
         ]);
     }
 
-    public function getCouponsByLocation(Credentials $credentials, $lat, $lon, $rad, $measurement='miles',$accountId)
+    public function getScopeableResourceByLocation(Credentials $credentials, $scope, $scope_id=false, $lat, $lon, $rad, $measurement='miles',$accountId)
     {
-        $requestUrl = $this->getEndpointRequestUrl($accountId).'/scope/coupons/'.$lat.'/'.$lon.'/'.$rad;
+//        dd('aa');
+        $scope_id_url = ($scope_id)?$scope_id.'/':'';
+        $requestUrl =
+            $this->getEndpointRequestUrl($accountId)."/scope/$scope/".$scope_id_url.$lat.'/'.$lon.'/'.$rad;
         return $this->httpClient->get($requestUrl, [
             'headers' => $credentials->getHeaders(),
             'auth' => $credentials->toArray()
         ]);
     }
 
-    public function getLoyaltyByLocation(Credentials $credentials, $lat, $lon, $rad, $measurement='miles',$accountId)
-    {
-        $requestUrl = $this->getEndpointRequestUrl($accountId).'/scope/loyalty/'.$lat.'/'.$lon.'/'.$rad;
-        return $this->httpClient->get($requestUrl, [
-            'headers' => $credentials->getHeaders(),
-            'auth' => $credentials->toArray()
-        ]);
-    }
+//    public function getCouponsByLocation(Credentials $credentials, $lat, $lon, $rad, $measurement='miles',$accountId)
+//    {
+//        $requestUrl = $this->getEndpointRequestUrl($accountId).'/scope/coupons/'.$lat.'/'.$lon.'/'.$rad;
+//        return $this->httpClient->get($requestUrl, [
+//            'headers' => $credentials->getHeaders(),
+//            'auth' => $credentials->toArray()
+//        ]);
+//    }
+//
+//    public function getLoyaltyByLocation(Credentials $credentials, $lat, $lon, $rad, $measurement='miles',$accountId)
+//    {
+//        $requestUrl = $this->getEndpointRequestUrl($accountId).'/scope/loyalty/'.$lat.'/'.$lon.'/'.$rad;
+//        return $this->httpClient->get($requestUrl, [
+//            'headers' => $credentials->getHeaders(),
+//            'auth' => $credentials->toArray()
+//        ]);
+//    }
 
 
     /**

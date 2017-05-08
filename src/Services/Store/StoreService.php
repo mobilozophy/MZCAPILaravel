@@ -33,14 +33,16 @@ class StoreService extends ServiceBase
         }
     }
 
-    public function getCouponsByLocation($lat, $lon, $rad, $registrationId, $measurement= 'miles',  $account_uuid = null, $scope = false)
+    public function getScopeableResourceByLocation($scopeResource, $scopeResource_id,$lat, $lon, $rad, $registrationId, $measurement= 'miles',  $account_uuid = null, $scope = false)
     {
         try {
-            $response = $this->apiService->getCouponsByLocation(
+            $response = $this->apiService->getScopeableResourceByLocation(
                 $this->getSubAccountCredentials(
                     $account_uuid
                     ,$scope
                     ,['MZRegistration'=>$registrationId])
+                    ,$scopeResource
+                    ,$scopeResource_id
                     ,$lat
                     ,$lon
                     ,$rad
@@ -58,30 +60,6 @@ class StoreService extends ServiceBase
         }
     }
 
-    public function getLoyaltyByLocation($lat, $lon, $rad, $registrationId, $measurement= 'miles',  $account_uuid = null, $scope = false)
-    {
-        try {
-            $response = $this->apiService->getLoyaltyByLocation(
-                $this->getSubAccountCredentials(
-                    $account_uuid
-                    ,$scope
-                    ,['MZRegistration'=>$registrationId])
-                ,$lat
-                ,$lon
-                ,$rad
-                ,$measurement
-                ,$account_uuid
-            );
-            if ($response->getStatusCode() == 200) {
-                return $response->getBody()->getContents();
-            } else {
-                return false;
-            }
-        } catch (\Exception $e)
-        {
-            return false;
-        }
-    }
 
 
 }
