@@ -24,4 +24,30 @@ class LoyaltyService extends ServiceBase
         $this->apiService = $loyaltyAPIService;
     }
 
+    /**
+     * Get - GET by ID
+     * @param      $id
+     * @param null $account_uuid
+     *
+     * @return bool
+     */
+    public function get($id,$account_uuid = null, $scope = false, $otherHeaders=[], $storeId = null)
+    {
+        try {
+            $response = $this->apiService->get(
+                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), $id, $storeId
+            );
+            if ($response->getStatusCode() == 200) {
+                return json_decode($response->getBody()->getContents());
+            } else {
+                return false;
+            }
+        } catch (\Exception $e)
+        {
+            return false;
+        }
+    }
+
+
+
 }

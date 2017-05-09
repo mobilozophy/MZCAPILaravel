@@ -16,11 +16,11 @@ class ServiceBase
      *
      * @return bool|mixed
      */
-    public function add(array $data, $account_uuid = null, $scope = false)
+    public function add(array $data, $account_uuid = null, $scope = false, $otherHeaders=[])
     {
 
         $response = $this->apiService->add(
-            $this->getSubAccountCredentials($account_uuid,$scope), $data
+            $this->getSubAccountCredentials($account_uuid,$scope,$otherHeaders), $data
         );
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
@@ -39,11 +39,11 @@ class ServiceBase
      *
      * @return bool|mixed
      */
-    public function update($id, array $data, $account_uuid = null, $scope = false)
+    public function update($id, array $data, $account_uuid = null, $scope = false, $otherHeaders=[])
     {
 
         $response = $this->apiService->update(
-            $this->getSubAccountCredentials($account_uuid,$scope), $id, $data, $account_uuid
+            $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), $id, $data, $account_uuid
         );
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
@@ -61,11 +61,11 @@ class ServiceBase
      *
      * @return bool
      */
-    public function get($id,$account_uuid = null, $scope = false)
+    public function get($id,$account_uuid = null, $scope = false, $otherHeaders=[])
     {
         try {
             $response = $this->apiService->get(
-                $this->getSubAccountCredentials($account_uuid,$scope), $id
+                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), $id
             );
             if ($response->getStatusCode() == 200) {
                 return json_decode($response->getBody()->getContents());
@@ -85,10 +85,10 @@ class ServiceBase
      *
      * @return bool
      */
-    public function getall($account_uuid = null, $scope = false)
+    public function getall($account_uuid = null, $scope = false, $otherHeaders=[])
     {
         $response = $this->apiService->getAll(
-            $this->getSubAccountCredentials($account_uuid,$scope)
+            $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders)
         );
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
@@ -106,10 +106,10 @@ class ServiceBase
      *
      * @return bool
      */
-    public function delete($id, $account_uuid = null, $scope = false)
+    public function delete($id, $account_uuid = null, $scope = false, $otherHeaders=[])
     {
         $response = $this->apiService->delete(
-            $this->getSubAccountCredentials($account_uuid,$scope), $id
+            $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), $id
         );
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());

@@ -33,7 +33,7 @@ class StoreService extends ServiceBase
         }
     }
 
-    public function getScopeableResourceByLocation($scopeResource, $scopeResource_id,$lat, $lon, $rad, $registrationId, $measurement= 'miles',  $account_uuid = null, $scope = false)
+    public function getScopeableResourceByLocation($scopeResource, $scopeResource_id,$lat, $lon, $rad, $registrationId, $measurement= 'miles',  $account_uuid = null, $scope = false, $location_id = false)
     {
         try {
             $response = $this->apiService->getScopeableResourceByLocation(
@@ -41,6 +41,7 @@ class StoreService extends ServiceBase
                     $account_uuid
                     ,$scope
                     ,['MZRegistration'=>$registrationId])
+
                     ,$scopeResource
                     ,$scopeResource_id
                     ,$lat
@@ -48,6 +49,7 @@ class StoreService extends ServiceBase
                     ,$rad
                     ,$measurement
                     ,$account_uuid
+                    ,$location_id
             );
             if ($response->getStatusCode() == 200) {
                 return $response->getBody()->getContents();
