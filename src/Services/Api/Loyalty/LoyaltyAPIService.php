@@ -28,5 +28,5 @@ class LoyaltyAPIService extends MZCAPIAPIService
         ]);
 
     }
-    
+
 }

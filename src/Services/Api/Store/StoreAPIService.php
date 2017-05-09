@@ -55,9 +55,9 @@ class StoreAPIService extends AbstractAPIService
      * @param integer $accountId
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function get(Credentials $credentials, $accountId)
+    public function get(Credentials $credentials, $accountId,$include=[])
     {
-        $requestUrl = $this->getEndpointRequestUrl($accountId);
+        $requestUrl = $this->getEndpointRequestUrl($accountId).(!is_null($include)?"?include=$include":'');
         return $this->httpClient->get($requestUrl, [
             'headers' => $credentials->getHeaders(),
             'auth' => $credentials->toArray()

@@ -61,11 +61,11 @@ class ServiceBase
      *
      * @return bool
      */
-    public function get($id,$account_uuid = null, $scope = false, $otherHeaders=[])
+    public function get($id,$account_uuid = null, $scope = false, $otherHeaders=[], $include=[])
     {
         try {
             $response = $this->apiService->get(
-                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), $id
+                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), $id,$include
             );
             if ($response->getStatusCode() == 200) {
                 return json_decode($response->getBody()->getContents());
