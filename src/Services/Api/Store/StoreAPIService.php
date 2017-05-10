@@ -55,9 +55,9 @@ class StoreAPIService extends AbstractAPIService
      * @param integer $accountId
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function get(Credentials $credentials, $accountId,$include=[])
+    public function get(Credentials $credentials, $accountId,$include=false)
     {
-        $requestUrl = $this->getEndpointRequestUrl($accountId).(!is_null($include)?"?include=$include":'');
+        $requestUrl = $this->getEndpointRequestUrl($accountId).(($include)?"?include=$include":'');
         return $this->httpClient->get($requestUrl, [
             'headers' => $credentials->getHeaders(),
             'auth' => $credentials->toArray()
@@ -75,7 +75,6 @@ class StoreAPIService extends AbstractAPIService
 
     public function getScopeableResourceByLocation(Credentials $credentials, $scope, $scope_id=false, $lat, $lon, $rad, $measurement='miles',$accountId)
     {
-//        dd('aa');
         $scope_id_url = ($scope_id)?$scope_id.'/':'';
         $requestUrl =
             $this->getEndpointRequestUrl($accountId)."/scope/$scope/".$scope_id_url.$lat.'/'.$lon.'/'.$rad;
