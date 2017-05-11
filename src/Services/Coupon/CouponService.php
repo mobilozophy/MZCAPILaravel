@@ -38,6 +38,26 @@ class CouponService extends ServiceBase
         }
     }
 
+    /**
+     * Get - GET by ID
+     * @param      $id
+     * @param null $account_uuid
+     *
+     * @return bool
+     */
+    public function getAllForAvailability($availability, $account_uuid = null, $scope = false, $otherHeaders=[])
+{
+    $response = $this->apiService->getAllForAvailability(
+        $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), $availability
+    );
+    if ($response->getStatusCode() == 200) {
+        return json_decode($response->getBody()->getContents());
+    } else
+    {
+        return false;
+    }
+}
+
 
 
 }

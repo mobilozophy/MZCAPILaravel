@@ -29,4 +29,20 @@ class CouponAPIService extends MZCAPIAPIService
 
     }
 
+    /**
+     * Send a request to retrieve all stores.
+     *
+     * @param Credentials $credentials
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAllForAvailability(Credentials $credentials, $availability)
+    {
+        $requestUrl = $this->getEndpointRequestUrl().'?availability='.$availability;
+        return $this->httpClient->get($requestUrl, [
+            'headers' => $credentials->getHeaders(),
+            'auth'    => $credentials->toArray()
+        ]);
+
+    }
+
 }
