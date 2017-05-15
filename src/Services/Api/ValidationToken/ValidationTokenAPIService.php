@@ -26,6 +26,23 @@ class ValidationTokenAPIService extends AbstractAPIService
         ]);
     }
 
+    /**
+     * Send a request to retrieve a store.
+     *
+     * @param Credentials $credentials
+     * @param integer $accountId
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getByToken(Credentials $credentials, $token)
+    {
+        $requestUrl = $this->getEndpointRequestUrl([$token]);
+
+        return $this->httpClient->get($requestUrl, [
+            'headers' => $credentials->getHeaders(),
+            'auth' => $credentials->toArray()
+        ]);
+    }
+
 
 
     /**

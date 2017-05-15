@@ -39,6 +39,23 @@ class ValidationTokenService extends ServiceBase
         }
     }
 
+    public function getTokenInfo($token, $account_uuid = null, $scope = false)
+    {
+        try {
+            $response = $this->apiService->getByToken(
+                $this->getSubAccountCredentials($account_uuid,$scope), $token
+            );
+            if ($response->getStatusCode() == 200) {
+                return json_decode($response->getBody()->getContents());
+            } else {
+                return false;
+            }
+        } catch (\Exception $e)
+        {
+            return false;
+        }
+    }
+
 
 
 }
