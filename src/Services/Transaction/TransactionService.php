@@ -35,11 +35,11 @@ class TransactionService extends ServiceBase
     }
 
 
-    public function coupon($id, array $data, $account_uuid = null)
+    public function coupon($id, array $data, $account_uuid = null, $scope = false, $otherHeaders)
     {
 
         $response = $this->apiService->coupon(
-            $this->getSubAccountCredentials($account_uuid), $id, $data
+            $this->getSubAccountCredentials($account_uuid,$scope,$otherHeaders), $id, $data
         );
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
