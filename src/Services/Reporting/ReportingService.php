@@ -40,5 +40,23 @@ class ReportingService extends ServiceBase
         }
     }
 
+    public function getRegistrationReport($type, $timespan, $account_uuid, $scope, $otherHeaders)
+    {
+
+        $response = $this->reportingAPIService->getRegistrationsReport(
+            $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders),$type,$timespan
+        );
+
+        if ($response->getStatusCode() == 200) {
+            return json_decode($response->getBody()->getContents());
+        } else
+        {
+            return false;
+        }
+    }
+
+
+
+
 
 }

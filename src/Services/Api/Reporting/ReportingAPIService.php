@@ -29,6 +29,17 @@ class ReportingAPIService extends AbstractAPIService
     }
 
 
+    public function getRegistrationsReport(Credentials $credentials, $type, $timespan)
+    {
+
+        $requestUrl = $this->getEndpointRequestUrl(['transactions',$type,$timespan]);
+//        dd($requestUrl);
+        return $this->httpClient->get($requestUrl, [
+            'headers' => $credentials->getHeaders(),
+            'auth' => $credentials->toArray()
+        ]);
+    }
+
 
     /**
      * Get base API request URL with additional segments.
