@@ -34,7 +34,7 @@ class RegistrationAPIService extends MZCAPIAPIService
 
     }
 
-    public function locateResteredUserByEmail(Credentials $credentials, array $params)
+    public function locateRegisteredUserByEmail(Credentials $credentials, array $params)
     {
         $requestUrl = $this->getEndpointRequestUrl().'/lookup/email';
 

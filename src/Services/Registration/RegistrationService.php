@@ -48,4 +48,18 @@ class RegistrationService extends ServiceBase
         }
     }
 
+    public function locateRegisteredUserByEmail(array $data, $account_uuid = null)
+    {
+
+        $response = $this->apiService->locateRegisteredUserByEmail(
+            $this->getSubAccountCredentials($account_uuid), $data
+        );
+        if ($response->getStatusCode() == 200) {
+            return json_decode($response->getBody()->getContents());
+        } else
+        {
+            return false;
+        }
+    }
+
 }
