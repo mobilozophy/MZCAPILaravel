@@ -4,13 +4,20 @@ namespace Mobilozophy\MZCAPILaravel\Services\MessageCenter;
 
 
 use Mobilozophy\MZCAPILaravel\Services\Api\MessageCenter\CodeAPIService;
-use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
 use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
-use Mobilozophy\MZCAPILaravel\Services\UsesCredentialsTrait;
 
+/**
+ * Class CodeService
+ * @author Jeffrey Wray <jwray@mobilozophy.com>
+ * @package Mobilozophy\MZCAPILaravel\Services\MessageCenter
+ */
 class CodeService extends ServiceBase
 {
 
+    /**
+     * CodeService constructor.
+     * @param CodeAPIService $codeAPIService
+     */
     public function __construct(
         CodeAPIService $codeAPIService
     ) {

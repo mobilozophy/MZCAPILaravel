@@ -2,12 +2,11 @@
 
 namespace Mobilozophy\MZCAPILaravel\Services\Api\UrlShortener;
 
-use Mobilozophy\MZCAPILaravel\Services\Api\AbstractAPIService;
 use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
-use Mobilozophy\MZCAPILaravel\Services\ServiceActionException;
+use Mobilozophy\MZCAPILaravel\Services\Api\MZCAPIAPIService;
 //use Log;
 
-class UrlShortenerAPIService extends AbstractAPIService
+class UrlShortenerAPIService extends MZCAPIAPIService
 {
     const ENDPOINT = 'url-shortener';
 
@@ -21,14 +20,4 @@ class UrlShortenerAPIService extends AbstractAPIService
         ]);
     }
 
-    protected function getBaseRequestUrl($segments = null)
-    {
-        if (is_array($segments)) {
-            $segments = implode('/', $segments);
-        }
-
-        $baseUrl = config('services.mz_v2_api.url');
-
-        return $baseUrl . '/' . $segments;
-    }
 }

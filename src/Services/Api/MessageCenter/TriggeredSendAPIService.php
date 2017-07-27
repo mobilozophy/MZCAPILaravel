@@ -2,20 +2,20 @@
 
 namespace Mobilozophy\MZCAPILaravel\Services\Api\MessageCenter;
 
-use Mobilozophy\MZCAPILaravel\Services\Api\AbstractAPIService;
 use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
+use Mobilozophy\MZCAPILaravel\Services\Api\MZCAPIAPIService;
 
-class TriggeredSendAPIService extends AbstractAPIService
+class TriggeredSendAPIService extends MZCAPIAPIService
 {
     const ENDPOINT = 'message-center/triggered-send';
 
     /**
      * Send a request to add a new list.
-     *
      * @param Credentials $credentials
-     * @param array       $list
+     * @param             $id
+     * @param             $payload
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function send(Credentials $credentials, $id, $payload)
     {
@@ -28,19 +28,4 @@ class TriggeredSendAPIService extends AbstractAPIService
         ]);
     }
 
-    /**
-     * Get base API request URL with additional segments.
-     *
-     * @param mixed $segments
-     */
-    protected function getBaseRequestUrl($segments = null)
-    {
-        if (is_array($segments)) {
-            $segments = implode('/', $segments);
-        }
-
-        $baseUrl = env('MZCAPI_BASEURL');
-
-        return $baseUrl . '/' . $segments;
-    }
 }

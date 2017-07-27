@@ -2,10 +2,10 @@
 
 namespace Mobilozophy\MZCAPILaravel\Services\Api\Reporting;
 
-use Mobilozophy\MZCAPILaravel\Services\Api\AbstractAPIService;
 use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
+use Mobilozophy\MZCAPILaravel\Services\Api\MZCAPIAPIService;
 
-class ReportingAPIService extends AbstractAPIService
+class ReportingAPIService extends MZCAPIAPIService
 {
     const ENDPOINT = 'reports';
 
@@ -21,7 +21,6 @@ class ReportingAPIService extends AbstractAPIService
     {
 
         $requestUrl = $this->getEndpointRequestUrl(['transactions',$type,$timespan]);
-//        dd($requestUrl);
         return $this->httpClient->get($requestUrl, [
             'headers' => $credentials->getHeaders(),
             'auth' => $credentials->toArray()
@@ -33,29 +32,9 @@ class ReportingAPIService extends AbstractAPIService
     {
 
         $requestUrl = $this->getEndpointRequestUrl(['registrations',$type,$timespan]);
-//        dd($requestUrl);
         return $this->httpClient->get($requestUrl, [
             'headers' => $credentials->getHeaders(),
             'auth' => $credentials->toArray()
         ]);
-    }
-
-
-    /**
-     * Get base API request URL with additional segments.
-     *
-     * @param mixed $segments
-     *
-     * @return string
-     */
-    protected function getBaseRequestUrl($segments = null)
-    {
-        if (is_array($segments)) {
-            $segments = implode('/', $segments);
-        }
-
-        $baseUrl = env('MZCAPI_BASEURL');
-
-        return $baseUrl . '/' . $segments;
     }
 }

@@ -2,6 +2,11 @@
 namespace Mobilozophy\MZCAPILaravel\Services;
 use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
 
+/**
+ * Class ServiceBase
+ * @author Jeffrey Wray <jwray@mobilozophy.com>
+ * @package Mobilozophy\MZCAPILaravel\Services
+ */
 class ServiceBase
 {
     use UsesCredentialsTrait;
@@ -10,10 +15,10 @@ class ServiceBase
 
 
     /**
-     * Add - POST
-     * @param array $data
-     * @param null  $account_uuid
-     *
+     * @param array $data Data to be submitted
+     * @param null|string $account_uuid The account id of the account to perform this call on.
+     * @param bool|string $scope The scope to apply to call (ex. with-children will scope to all child accounts).
+     * @param array $otherHeaders Other headers to apply to call.
      * @return bool|mixed
      */
     public function add(array $data, $account_uuid = null, $scope = false, $otherHeaders=[])
@@ -32,11 +37,11 @@ class ServiceBase
 
 
     /**
-     * Update - PUT
-     * @param       $id
-     * @param array $data
-     * @param null  $account_uuid
-     *
+     * @param string $id Id (UUID) of the record to be updated.
+     * @param array $data Data to be submitted.
+     * @param null|string $account_uuid The account id of the account to perform this call on.
+     * @param bool|string $scope The scope to apply to call (ex. with-children will scope to all child accounts).
+     * @param array $otherHeaders Other headers to apply to call.
      * @return bool|mixed
      */
     public function update($id, array $data, $account_uuid = null, $scope = false, $otherHeaders=[])
@@ -55,11 +60,12 @@ class ServiceBase
 
 
     /**
-     * Get - GET by ID
-     * @param      $id
-     * @param null $account_uuid
-     *
-     * @return bool
+     * @param string $id Id (UUID) of the record to be retrieved.
+     * @param null|string $account_uuid The account id of the account to perform this call on.
+     * @param bool|string $scope The scope to apply to call (ex. with-children will scope to all child accounts).
+     * @param array $otherHeaders Other headers to apply to call.
+     * @param array $include Related items to include in response.
+     * @return bool|mixed
      */
     public function get($id,$account_uuid = null, $scope = false, $otherHeaders=[], $include=[])
     {
@@ -80,10 +86,10 @@ class ServiceBase
 
 
     /**
-     * Get All - GET All
-     * @param null $account_uuid
-     *
-     * @return bool
+     * @param null|string $account_uuid The account id of the account to perform this call on.
+     * @param bool|string $scope The scope to apply to call (ex. with-children will scope to all child accounts).
+     * @param array $otherHeaders Other headers to apply to call.
+     * @return bool|mixed
      */
     public function getall($account_uuid = null, $scope = false, $otherHeaders=[])
     {
@@ -100,11 +106,11 @@ class ServiceBase
 
 
     /**
-     * Delete - DELETE
-     * @param      $id
-     * @param null $account_uuid
-     *
-     * @return bool
+     * @param string $id Id (UUID) of the record to be deleted.
+     * @param null|string $account_uuid The account id of the account to perform this call on.
+     * @param bool|string $scope The scope to apply to call (ex. with-children will scope to all child accounts).
+     * @param array $otherHeaders Other headers to apply to call.
+     * @return bool|mixed
      */
     public function delete($id, $account_uuid = null, $scope = false, $otherHeaders=[])
     {
@@ -121,9 +127,10 @@ class ServiceBase
 
 
     /**
-     *
-     * @param null $account
-     *
+     * Get Account Credentials for API Calls
+     * @param null|string $account The account id of the account to perform this call on.
+     * @param bool|string $scope The scope to apply to call (ex. with-children will scope to all child accounts).
+     * @param array $otherHeaders Other headers to apply to call.
      * @return Credentials
      */
     public function getSubAccountCredentials($account = null, $scope = false, $otherHeaders = array())
@@ -150,6 +157,10 @@ class ServiceBase
         );
     }
 
+    /**
+     * @param $exception
+     * @return string
+     */
     protected function handleErrorException($exception)
     {
         $responseBody = $exception->getResponse()->getBody()->getContents();

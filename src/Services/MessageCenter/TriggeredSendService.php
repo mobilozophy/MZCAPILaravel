@@ -2,14 +2,21 @@
 
 namespace Mobilozophy\MZCAPILaravel\Services\MZCAPI\MessageCenter;
 
-use Mobilozophy\MZCAPILaravel\Services\Api\MZCAPI\MessageCenter\TriggeredSendAPIService;
-use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
+use Mobilozophy\MZCAPILaravel\Services\Api\MessageCenter\TriggeredSendAPIService;
 use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
-use Mobilozophy\MZCAPILaravel\Services\UsesCredentialsTrait;
 
+/**
+ * Class TriggeredSendService
+ * @author Jeffrey Wray <jwray@mobilozophy.com>
+ * @package Mobilozophy\MZCAPILaravel\Services\MZCAPI\MessageCenter
+ */
 class TriggeredSendService extends ServiceBase
 {
 
+    /**
+     * TriggeredSendService constructor.
+     * @param TriggeredSendAPIService $triggeredSendAPIService
+     */
     public function __construct(
         TriggeredSendAPIService $triggeredSendAPIService
     ) {

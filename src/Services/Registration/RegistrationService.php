@@ -6,20 +6,26 @@ use Mobilozophy\MZCAPILaravel\Services\Api\Registration\RegistrationAPIService;
 use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
 
 /**
- * Class LoyaltyService
- * Purpose: Explain what this class does.
+ * Class RegistrationService
  * @author Jeffrey Wray <jwray@mobilozophy.com>
- * Last Modified: ${DATE}
- * @package Mobilozophy\MZCAPILaravel\Services\Loyalty
+ * @package Mobilozophy\MZCAPILaravel\Services\Registration
  */
 class RegistrationService extends ServiceBase
 {
 
-
+    /**
+     * RegistrationService constructor.
+     * @param RegistrationAPIService $registrationAPIService
+     */
     public function __construct(RegistrationAPIService $registrationAPIService) {
         $this->apiService = $registrationAPIService;
     }
 
+    /**
+     * @param array $data Data to validate login.
+     * @param null|string $account_uuid The account id of the account to perform this call on.
+     * @return bool|mixed
+     */
     public function login(array $data, $account_uuid = null)
     {
 
@@ -34,6 +40,11 @@ class RegistrationService extends ServiceBase
         }
     }
 
+    /**
+     * @param array $data
+     * @param null $account_uuid
+     * @return bool|mixed
+     */
     public function loginWithMerchantIdentifier(array $data, $account_uuid = null)
     {
 
@@ -48,6 +59,11 @@ class RegistrationService extends ServiceBase
         }
     }
 
+    /**
+     * @param array $data Data to validate login.
+     * @param null|string $account_uuid The account id of the account to perform this call on.
+     * @return bool|mixed
+     */
     public function locateRegisteredUserByEmail(array $data, $account_uuid = null)
     {
 

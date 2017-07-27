@@ -5,22 +5,31 @@ namespace Mobilozophy\MZCAPILaravel\Services\ValidationToken;
 use Mobilozophy\MZCAPILaravel\Services\Api\ValidationToken\ValidationTokenAPIService;
 use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
 
+/**
+ * Class ValidationTokenService
+ * @author Jeffrey Wray <jwray@mobilozophy.com>
+ * @package Mobilozophy\MZCAPILaravel\Services\ValidationToken
+ */
 class ValidationTokenService extends ServiceBase
 {
 
+    /**
+     * ValidationTokenService constructor.
+     * @param ValidationTokenAPIService $validationTokenAPIService
+     */
     public function __construct(
         ValidationTokenAPIService $validationTokenAPIService
     ) {
         $this->apiService = $validationTokenAPIService;
     }
 
+
     /**
-     * @param      $resource
-     * @param      $resource_id
-     * @param null $account_uuid
-     * @param bool $scope
-     *
-     * @return bool
+     * @param string $resource The name of the resource to scope token to.
+     * @param int $resource_id The Id of the resocurce to scope token to.
+     * @param null|string $account_uuid The account id of the account to perform this call on.
+     * @param bool|string $scope The scope to apply to call (ex. with-children will scope to all child accounts).
+     * @return bool|mixed
      */
     public function getToken($resource, $resource_id, $account_uuid = null, $scope = false)
     {
@@ -39,6 +48,12 @@ class ValidationTokenService extends ServiceBase
         }
     }
 
+    /**
+     * @param string $token The token to lookup.
+     * @param null|string $account_uuid The account id of the account to perform this call on.
+     * @param bool|string $scope The scope to apply to call (ex. with-children will scope to all child accounts).
+     * @return bool|mixed
+     */
     public function getTokenInfo($token, $account_uuid = null, $scope = false)
     {
         try {

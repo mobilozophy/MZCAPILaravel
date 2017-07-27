@@ -2,28 +2,35 @@
 
 namespace Mobilozophy\MZCAPILaravel\Services\Reporting;
 
-use Mobilozophy\MZCAPILaravel\Services\AbilityService;
-use Mobilozophy\MZCAPILaravel\Services\ActiveMerchantService;
-use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
-use Mobilozophy\MZCAPILaravel\Services\Api\Reporting\ReportingAPIService;
-use Mobilozophy\MZCAPILaravel\Services\Api\Reporting\SMSReportingAPIService;
-use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
-use Mobilozophy\MZCAPILaravel\Services\UsesCredentialsTrait;
 
+use Mobilozophy\MZCAPILaravel\Services\Api\Reporting\ReportingAPIService;
+use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
+
+/**
+ * Class ReportingService
+ * @author Jeffrey Wray <jwray@mobilozophy.com>
+ * @package Mobilozophy\MZCAPILaravel\Services\Reporting
+ */
 class ReportingService extends ServiceBase
 {
 
+    /**
+     * ReportingService constructor.
+     * @param ReportingAPIService $reportingAPIService
+     */
     public function __construct(
         ReportingAPIService $reportingAPIService
     ) {
         $this->reportingAPIService = $reportingAPIService;
     }
 
-
-
-
     /**
-     * Get keywords.
+     * @param string $type The type of report.
+     * @param string $timespan The timespan of the report.
+     * @param null|string $account_uuid The account id of the account to perform this call on.
+     * @param bool|string $scope The scope to apply to call (ex. with-children will scope to all child accounts).
+     * @param array $otherHeaders Other headers to apply to call.
+     * @return bool|mixed
      */
     public function getTransactionReport($type, $timespan, $account_uuid, $scope, $otherHeaders)
     {
@@ -40,6 +47,14 @@ class ReportingService extends ServiceBase
         }
     }
 
+    /**
+     * @param string $type The type of report.
+     * @param string $timespan The timespan of the report.
+     * @param null|string $account_uuid The account id of the account to perform this call on.
+     * @param bool|string $scope The scope to apply to call (ex. with-children will scope to all child accounts).
+     * @param array $otherHeaders Other headers to apply to call.
+     * @return bool|mixed
+     */
     public function getRegistrationReport($type, $timespan, $account_uuid, $scope, $otherHeaders)
     {
 

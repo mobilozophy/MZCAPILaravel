@@ -2,38 +2,43 @@
 
 namespace Mobilozophy\MZCAPILaravel\Services\UrlShortener;
 
-use Mobilozophy\MZCAPILaravel\Services\AbilityService;
-use Mobilozophy\MZCAPILaravel\Services\ActiveMerchantService;
-use Mobilozophy\MZCAPILaravel\Services\Api\MessageCenter\CodeAPIService;
-use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
 use Mobilozophy\MZCAPILaravel\Services\Api\UrlShortener\UrlShortenerAPIService;
 use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
-use Mobilozophy\MZCAPILaravel\Services\UsesCredentialsTrait;
 
+/**
+ * Class UrlShortenerService
+ * @author Jeffrey Wray <jwray@mobilozophy.com>
+ * @package Mobilozophy\MZCAPILaravel\Services\UrlShortener
+ */
 class UrlShortenerService extends ServiceBase
 {
-    use UsesCredentialsTrait;
-
     private $urlShortenerAPIService;
 
-
+    /**
+     * UrlShortenerService constructor.
+     * @param UrlShortenerAPIService $urlShortenerAPIService
+     */
     public function __construct(
         UrlShortenerAPIService $urlShortenerAPIService
     ) {
         $this->urlShortenerAPIService = $urlShortenerAPIService;
     }
 
-
-
-
     /**
-     * Get keywords.
+     * @return mixed
      */
     public function getDomains()
     {
-        return $this->urlShortenerAPIService->getAllDomainsForAccount(
+        $response = $this->urlShortenerAPIService->getAllDomainsForAccount(
             $this->getSubAccountCredentials()
-        )->json();
+        );
+
+        if ($response->getStatusCode() == 200) {
+            return json_decode($response->getBody()->getContents());
+        } else
+        {
+            return false;
+        }
     }
 
 }

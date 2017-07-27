@@ -2,7 +2,6 @@
 
 namespace Mobilozophy\MZCAPILaravel\Services\Api\Coupon;
 
-use Mobilozophy\MZCAPILaravel\Services\Api\AbstractAPIService;
 use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
 use Mobilozophy\MZCAPILaravel\Services\Api\MZCAPIAPIService;
 
@@ -11,11 +10,12 @@ class CouponAPIService extends MZCAPIAPIService
     const ENDPOINT = 'coupons';
 
     /**
-     * Send a request to retrieve a store.
-     *
+     * Send a request to retrieve a coupon.
      * @param Credentials $credentials
-     * @param integer $accountId
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @param int         $accountId
+     * @param null        $storeId
+     *
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function get(Credentials $credentials, $accountId, $storeId = null)
     {
@@ -30,10 +30,10 @@ class CouponAPIService extends MZCAPIAPIService
     }
 
     /**
-     * Send a request to retrieve all stores.
+     * Send a request to retrieve all coupons for given availability.
      *
      * @param Credentials $credentials
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function getAllForAvailability(Credentials $credentials, $availability)
     {

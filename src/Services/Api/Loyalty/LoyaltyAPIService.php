@@ -11,11 +11,12 @@ class LoyaltyAPIService extends MZCAPIAPIService
     const ENDPOINT = 'loyalty';
 
     /**
-     * Send a request to retrieve a store.
-     *
+     * Send a request to retrieve a loyalty program.
      * @param Credentials $credentials
-     * @param integer $accountId
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @param int         $accountId
+     * @param null        $storeId
+     *
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function get(Credentials $credentials, $accountId, $storeId = null)
     {

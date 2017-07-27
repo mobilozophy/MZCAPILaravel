@@ -12,12 +12,12 @@ class MZCAPIAPIService extends AbstractAPIService
 {
 
     /**
-     * Send a request to add a new store.
+     * Send a request to add a new resource.
      *
      * @param Credentials $credentials
      * @param array $params
      *
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function add(Credentials $credentials, array $params)
     {
@@ -32,14 +32,15 @@ class MZCAPIAPIService extends AbstractAPIService
     }
 
     /**
-     * Send a request ti update a store
+     * Send a request to update a resource
+     *
      * @param Credentials $credentials
-     * @param             $accountId
+     * @param             $id
      * @param array       $params
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function update(Credentials $credentials, $id, array $params, $accountId )
+    public function update(Credentials $credentials, $id, array $params)
     {
         $requestUrl = $this->getEndpointRequestUrl($id);
             return $this->httpClient->put($requestUrl, [
@@ -51,15 +52,15 @@ class MZCAPIAPIService extends AbstractAPIService
     }
 
     /**
-     * Send a request to retrieve a store.
+     * Send a request to retrieve a resource.
      *
      * @param Credentials $credentials
-     * @param integer $accountId
+     * @param string $id
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function get(Credentials $credentials, $accountId)
+    public function get(Credentials $credentials, $id)
     {
-        $requestUrl = $this->getEndpointRequestUrl($accountId);
+        $requestUrl = $this->getEndpointRequestUrl($id);
 
             return $this->httpClient->get($requestUrl, [
                 'headers' => $credentials->getHeaders(),
@@ -70,7 +71,7 @@ class MZCAPIAPIService extends AbstractAPIService
 
 
     /**
-     * Send a request to retrieve all stores.
+     * Send a request to retrieve all resources.
      *
      * @param Credentials $credentials
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -87,27 +88,26 @@ class MZCAPIAPIService extends AbstractAPIService
 
 
     /**
-     * Send a request to delete a store.
-     *
+     * Send a request to delete a resource
+     * .
      * @param Credentials $credentials
-     * @param integer $accountId
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @param string $id
+     * @return \Psr\Http\Message\ResponseInterface
      */
-    public function delete(Credentials $credentials, $accountId)
+    public function delete(Credentials $credentials, $id)
     {
-        $requestUrl = $this->getEndpointRequestUrl($accountId);
+        $requestUrl = $this->getEndpointRequestUrl($id);
             return $this->httpClient->delete($requestUrl, [
                 'headers' => $credentials->getHeaders(),
                 'auth'    => $credentials->toArray()
             ]);
-
     }
 
 
     /**
      * Get base API request URL with additional segments.
      *
-     * @param mixed $segments
+     * @param mixed $segments Segments of the URL
      *
      * @return string
      */

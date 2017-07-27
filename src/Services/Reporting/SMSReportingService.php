@@ -2,42 +2,62 @@
 
 namespace Mobilozophy\MZCAPILaravel\Services\Reporting;
 
-use Mobilozophy\MZCAPILaravel\Services\AbilityService;
-use Mobilozophy\MZCAPILaravel\Services\ActiveMerchantService;
-use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
+
 use Mobilozophy\MZCAPILaravel\Services\Api\Reporting\SMSReportingAPIService;
 use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
-use Mobilozophy\MZCAPILaravel\Services\UsesCredentialsTrait;
 
+/**
+ * Class SMSReportingService
+ * @author Jeffrey Wray <jwray@mobilozophy.com>
+ * @package Mobilozophy\MZCAPILaravel\Services\Reporting
+ */
 class SMSReportingService extends ServiceBase
 {
 
+    /**
+     * SMSReportingService constructor.
+     * @param SMSReportingAPIService $smsReportingAPIService
+     */
     public function __construct(
         SMSReportingAPIService $smsReportingAPIService
     ) {
         $this->smsReportingAPIService = $smsReportingAPIService;
     }
 
-
-
-
     /**
-     * Get keywords.
+     * @return mixed
      */
     public function getSubscriptions()
     {
-        return $this->smsReportingAPIService->getSubscriptions(
+        $response = $this->smsReportingAPIService->getSubscriptions(
             $this->getSubAccountCredentials()
-        )->json();
+        );
+        if ($response->getStatusCode() == 200) {
+            return json_decode($response->getBody()->getContents());
+        } else
+        {
+            return false;
+        }
     }
 
+    /**
+     * @param string $lookupVal The value to lookup. (ex. +17275551212)
+     * @param string $lookupValType The type of subscription (ex. sms)
+     * @return mixed
+     */
     public function getSubscriptionConfirmation($lookupVal, $lookupValType)
     {
-        return $this->smsReportingAPIService->getSubscriptionConfirmation(
+        $response = $this->smsReportingAPIService->getSubscriptionConfirmation(
             $this->getSubAccountCredentials(),
             $lookupVal,
             $lookupValType
-        )->json();
+        );
+        if ($response->getStatusCode() == 200) {
+            return json_decode($response->getBody()->getContents());
+        } else
+        {
+            return false;
+        }
     }
 
 
