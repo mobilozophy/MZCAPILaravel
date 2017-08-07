@@ -64,14 +64,24 @@ class ServiceBase
      * @param null|string $account_uuid The account id of the account to perform this call on.
      * @param bool|string $scope The scope to apply to call (ex. with-children will scope to all child accounts).
      * @param array $otherHeaders Other headers to apply to call.
-     * @param array $include Related items to include in response.
+     * @param null|array|string $include Related items to include in response.
      * @return bool|mixed
      */
-    public function get($id,$account_uuid = null, $scope = false, $otherHeaders=[], $include=[])
+    public function get($id,$account_uuid = null, $scope = false, $otherHeaders=[], $include=null)
     {
+
+        if(is_string($include))
+        {
+            $includeArray = explode(',',$include);
+        }
+        elseif (!is_array($include))
+        {
+            $includeArray = [];
+        }
+
         try {
             $response = $this->apiService->get(
-                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), $id,$include
+                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), $id,$includeArray
             );
             if ($response->getStatusCode() == 200) {
                 return json_decode($response->getBody()->getContents());
