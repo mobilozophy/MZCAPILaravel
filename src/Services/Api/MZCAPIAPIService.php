@@ -56,11 +56,12 @@ class MZCAPIAPIService extends AbstractAPIService
      *
      * @param Credentials $credentials
      * @param string $id
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @param string $include
+     * @return \Psr\Http\Message\ResponseInterface
      */
-    public function get(Credentials $credentials, $id)
+    public function get(Credentials $credentials, $id, $include)
     {
-        $requestUrl = $this->getEndpointRequestUrl($id);
+        $requestUrl = $this->getEndpointRequestUrl($id).(!is_null($include)?"?include=$include":'');
 
             return $this->httpClient->get($requestUrl, [
                 'headers' => $credentials->getHeaders(),
