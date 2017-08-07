@@ -34,8 +34,11 @@ class ValidationTokenService extends ServiceBase
     public function getToken($resource, $resource_id, $account_uuid = null, $scope = false)
     {
         try {
+            //Gather resource and resource id
+            $resources = $resource.'/'.$resource_id;
+            
             $response = $this->apiService->get(
-                $this->getSubAccountCredentials($account_uuid,$scope), $resource,$resource_id
+                $this->getSubAccountCredentials($account_uuid,$scope), $resources
             );
             if ($response->getStatusCode() == 200) {
                 return json_decode($response->getBody()->getContents());
