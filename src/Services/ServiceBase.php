@@ -78,6 +78,10 @@ class ServiceBase
         {
             $includeArray = [];
         }
+        elseif (is_array($include))
+        {
+            $includeArray = $include;
+        }
 
         try {
             $response = $this->apiService->get(
