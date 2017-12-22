@@ -2,14 +2,14 @@
 
 namespace Mobilozophy\MZCAPILaravel\Services\Beacon;
 
-use Mobilozophy\MZCAPILaravel\Services\Api\Account\BeaconAPIService;
+use Mobilozophy\MZCAPILaravel\Services\Api\Beacon\BeaconAPIService;
 use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
 
 /**
  * Class BeaconService
  * @package Mobilozophy\MZCAPILaravel\Services\Beacon
  */
-class AccountService extends ServiceBase
+class BeaconService extends ServiceBase
 {
 
     /**
