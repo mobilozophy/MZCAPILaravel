@@ -23,11 +23,14 @@ class MZCAPIAPIService extends AbstractAPIService
     {
         $requestUrl = $this->getEndpointRequestUrl();
 
-            return $this->httpClient->post($requestUrl, [
-                'headers'     => $credentials->getHeaders(),
-                'auth'        => $credentials->toArray(),
-                'form_params' => $params
-            ]);
+            return $this->httpClient->post(
+                $requestUrl,
+                $this->generateOptions($credentials,
+                    [
+                        'form_params' => $params,
+                    ]
+                )
+            );
 
     }
 
@@ -43,11 +46,15 @@ class MZCAPIAPIService extends AbstractAPIService
     public function update(Credentials $credentials, $id, array $params)
     {
         $requestUrl = $this->getEndpointRequestUrl($id);
-            return $this->httpClient->put($requestUrl, [
-                'headers'     => $credentials->getHeaders(),
-                'auth'        => $credentials->toArray(),
-                'form_params' => $params
-            ]);
+
+        return $this->httpClient->put(
+            $requestUrl,
+            $this->generateOptions($credentials,
+                [
+                    'form_params' => $params,
+                ]
+            )
+        );
 
     }
 
@@ -65,10 +72,10 @@ class MZCAPIAPIService extends AbstractAPIService
 
         $includeAddOn = ((!is_null($includesImplode) && $includesImplode!='')?"?include=$includesImplode":'');
         $requestUrl = $this->getEndpointRequestUrl($id).$includeAddOn;
-            return $this->httpClient->get($requestUrl, [
-                'headers' => $credentials->getHeaders(),
-                'auth'    => $credentials->toArray()
-            ]);
+        return $this->httpClient->get(
+            $requestUrl,
+            $this->generateOptions($credentials)
+        );
 
     }
 
@@ -82,10 +89,10 @@ class MZCAPIAPIService extends AbstractAPIService
     public function getAll(Credentials $credentials)
     {
         $requestUrl = $this->getEndpointRequestUrl();
-            return $this->httpClient->get($requestUrl, [
-                'headers' => $credentials->getHeaders(),
-                'auth'    => $credentials->toArray()
-            ]);
+        return $this->httpClient->get(
+            $requestUrl,
+            $this->generateOptions($credentials)
+        );
 
     }
 
@@ -100,10 +107,10 @@ class MZCAPIAPIService extends AbstractAPIService
     public function delete(Credentials $credentials, $id)
     {
         $requestUrl = $this->getEndpointRequestUrl($id);
-            return $this->httpClient->delete($requestUrl, [
-                'headers' => $credentials->getHeaders(),
-                'auth'    => $credentials->toArray()
-            ]);
+        return $this->httpClient->delete(
+            $requestUrl,
+            $this->generateOptions($credentials)
+        );
     }
 
 
@@ -123,6 +130,39 @@ class MZCAPIAPIService extends AbstractAPIService
         $baseUrl = env('MZCAPI_BASEURL');
 
         return $baseUrl . '/' . $segments;
+    }
+
+    protected function generateOptions(Credentials $credentials, $options = null)
+    {
+
+        $base = [
+            'headers'     => $credentials->getHeaders(),
+            'auth'        => $credentials->toArray(),
+        ];
+
+        if (isset($options))
+        {
+            $base = array_merge($base,$options);
+        }
+
+        //Check if we need to proxy the request
+        if(env('PROXY_REQUESTS_IP_PORT', false))
+        {
+            $proxy = [
+                'proxy' => [
+                    'http' => 'tcp://' . env('PROXY_REQUESTS_IP_PORT'), // Use this proxy with "http"
+                    'https' => 'tcp://' . env('PROXY_REQUESTS_IP_PORT')
+
+//                        'no' => ['.mit.edu', 'foo.com']    // Don't use a proxy with these
+                ]
+            ];
+
+            $base = array_merge($base,$proxy);
+        }
+
+        return $base;
+
+
     }
 
 

@@ -30,4 +30,19 @@ class StoreAPIService extends MZCAPIAPIService
         ]);
     }
 
+
+    public function pairBeaconsToLocation(Credentials $credentials, $location_id, $device_serial, $device_manuf)
+    {
+
+        $requestUrl =
+            $this->getEndpointRequestUrl()."/$location_id/beacons/$device_serial/manufacturer/$device_manuf";
+        return $this->httpClient->put($requestUrl, [
+            'headers' => $credentials->getHeaders(),
+            'auth' => $credentials->toArray()
+        ]);
+
+
+
+    }
+
 }

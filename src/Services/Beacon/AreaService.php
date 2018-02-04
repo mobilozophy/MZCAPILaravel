@@ -2,17 +2,17 @@
 
 namespace Mobilozophy\MZCAPILaravel\Services\Beacon;
 
-use Mobilozophy\MZCAPILaravel\Services\Api\Beacon\BeaconAPIService;
+use Mobilozophy\MZCAPILaravel\Services\Api\Beacon\AreaAPIService;
 use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
 
 /**
- * Class BeaconService
+ * Class AreaService
  * @package Mobilozophy\MZCAPILaravel\Services\Beacon
  */
-class BeaconService extends ServiceBase
+class AreaService extends ServiceBase
 {
 
-    public function __construct(BeaconAPIService $apiService) {
+    public function __construct(AreaAPIService $apiService) {
         $this->apiService = $apiService;
     }
 

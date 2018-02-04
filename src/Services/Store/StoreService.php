@@ -87,6 +87,39 @@ class StoreService extends ServiceBase
         }
     }
 
+    public function pairBeaconsToLocation($location_id, $device_serial, $device_manuf, $account_uuid = null, $scope=false)
+    {
+        try {
+            $response = $this->apiService->pairBeaconsToLocation(
+                $this->getSubAccountCredentials(
+                    $account_uuid
+                    ,$scope)
+
+                ,$location_id
+                ,$device_serial
+                ,$device_manuf
+            );
+
+            if ($response->getStatusCode() == 200) {
+                $response_for_exist_assignment = $response->getBody()->getContents();
+            } else {
+                return false;
+            }
+
+
+
+
+
+
+
+
+
+        } catch (\Exception $e)
+        {
+            return false;
+        }
+    }
+
 
 
 }
