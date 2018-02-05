@@ -146,19 +146,19 @@ class MZCAPIAPIService extends AbstractAPIService
         }
 
         //Check if we need to proxy the request
-        if(env('PROXY_REQUESTS_IP_PORT', false))
-        {
-            $proxy = [
-                'proxy' => [
-                    'http' => 'tcp://' . env('PROXY_REQUESTS_IP_PORT'), // Use this proxy with "http"
-                    'https' => 'tcp://' . env('PROXY_REQUESTS_IP_PORT')
-
-//                        'no' => ['.mit.edu', 'foo.com']    // Don't use a proxy with these
-                ]
-            ];
-
-            $base = array_merge($base,$proxy);
-        }
+//        if(env('PROXY_REQUESTS_IP_PORT', false))
+//        {
+//            $proxy = [
+//                'proxy' => [
+//                    'http' => 'tcp://' . env('PROXY_REQUESTS_IP_PORT'), // Use this proxy with "http"
+//                    'https' => 'tcp://' . env('PROXY_REQUESTS_IP_PORT')
+//
+////                        'no' => ['.mit.edu', 'foo.com']    // Don't use a proxy with these
+//                ]
+//            ];
+//
+//            $base = array_merge($base,$proxy);
+//        }
 
         return $base;
 
