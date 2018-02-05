@@ -101,7 +101,7 @@ class StoreService extends ServiceBase
             );
 
             if ($response->getStatusCode() == 200) {
-                $response_for_exist_assignment = $response->getBody()->getContents();
+                return $response->getBody()->getContents();
             } else {
                 return false;
             }
