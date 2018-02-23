@@ -2,7 +2,7 @@
 
 namespace Mobilozophy\MZCAPILaravel\Services\Beacon;
 
-use Mobilozophy\MZCAPILaravel\Services\Api\Redemption\RegionAPIService;
+use Mobilozophy\MZCAPILaravel\Services\Api\Beacon\RegionAPIService;
 use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
 
 /**
