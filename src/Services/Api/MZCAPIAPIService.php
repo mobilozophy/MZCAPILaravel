@@ -136,29 +136,23 @@ class MZCAPIAPIService extends AbstractAPIService
     {
 
         $base = [
-            'headers'     => $credentials->getHeaders(),
-            'auth'        => $credentials->toArray(),
+            'headers' => $credentials->getHeaders(),
+            'auth' => $credentials->toArray(),
         ];
 
-        if (isset($options))
-        {
-            $base = array_merge($base,$options);
+        if (isset($options)) {
+            $base = array_merge($base, $options);
         }
 
-        //Check if we need to proxy the request
-        if(env('PROXY_REQUESTS_IP_PORT', false))
-        {
+        //Check if we need to proxy the request; really only to be used in a development environement
+        if (env('PROXY_REQUESTS_IP_PORT', false)) {
             $proxy = [
-                'proxy' =>'http://'. env('PROXY_REQUESTS_IP_PORT'),
-              ];
-            $base = array_merge($base,$proxy);
+                'proxy' => 'http://' . env('PROXY_REQUESTS_IP_PORT'),
+            ];
+            $base = array_merge($base, $proxy);
         }
 
         return $base;
 
-
     }
-
-
-
 }
