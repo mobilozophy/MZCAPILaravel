@@ -146,8 +146,14 @@ class MZCAPIAPIService extends AbstractAPIService
 
         //Check if we need to proxy the request; really only to be used in a development environement
         if (env('PROXY_REQUESTS_IP_PORT', false)) {
+            if ( is_bool(env('PROXY_REQUESTS_IP_PORT', false)) ){
+                $address = gethostbyname(trim(exec("hostname"))).':8888';
+            }else
+            {
+                $address = env('PROXY_REQUESTS_IP_PORT');
+            }
             $proxy = [
-                'proxy' => 'http://' . env('PROXY_REQUESTS_IP_PORT'),
+                'proxy' => 'http://' . $address,
             ];
             $base = array_merge($base, $proxy);
         }
