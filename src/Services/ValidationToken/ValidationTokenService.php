@@ -31,12 +31,15 @@ class ValidationTokenService extends ServiceBase
      * @param bool|string $scope The scope to apply to call (ex. with-children will scope to all child accounts).
      * @return bool|mixed
      */
-    public function getToken($resource, $resource_id, $account_uuid = null, $scope = false)
+    public function getToken($resource, $resource_id, $type='QR Code', $code = NULL, $account_uuid = null, $scope = false)
     {
         try {
-            //Gather resource and resource id
-            $resources = $resource.'/'.$resource_id;
-            
+            //Gather resource and resource id; compose url
+            $resources = $resource.'/'.$resource_id.'?type='.$type;
+            if( !is_null($code) ) {
+                $resources .='&code='.$code;
+            }
+
             $response = $this->apiService->get(
                 $this->getSubAccountCredentials($account_uuid,$scope), $resources
             );
