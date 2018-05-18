@@ -1,6 +1,6 @@
 <?php
 
-namespace Mobilozophy\MZCAPILaravel\Services\CouponTemplate;
+namespace Mobilozophy\MZCAPILaravel\Services\API\CouponTemplate;
 
 use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
 use Mobilozophy\MZCAPILaravel\Services\Api\MZCAPIAPIService;

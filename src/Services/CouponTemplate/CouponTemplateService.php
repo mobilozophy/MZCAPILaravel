@@ -8,7 +8,7 @@
 
 namespace Mobilozophy\MZCAPILaravel\Services\CouponTemplate;
 
-use App\Services\API\CouponTemplateAPIService;
+use Mobilozophy\MZCAPILaravel\Services\Api\CouponTemplate\CouponTemplateAPIService;
 use Mobilozophy\MZCAPILaravel\Services\Api\Coupon\CouponAPIService;
 use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
 
