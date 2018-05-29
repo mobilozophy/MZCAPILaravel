@@ -106,13 +106,29 @@ class StoreService extends ServiceBase
                 return false;
             }
 
+        } catch (\Exception $e)
+        {
+            return false;
+        }
+    }
 
+    public function removeBeaconsFromLocation($location_id, $device_serial, $device_manuf, $account_uuid = null, $scope=false)
+    {
+        try {
+            $response = $this->apiService->deleteBeacon(
+                $this->getSubAccountCredentials(
+                    $account_uuid
+                    ,$scope)
+                ,$location_id
+                ,$device_serial
+                ,$device_manuf
+            );
 
-
-
-
-
-
+            if ($response->getStatusCode() == 200) {
+                return $response->getBody()->getContents();
+            } else {
+                return false;
+            }
 
         } catch (\Exception $e)
         {
