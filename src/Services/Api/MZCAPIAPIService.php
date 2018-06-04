@@ -127,7 +127,7 @@ class MZCAPIAPIService extends AbstractAPIService
             $segments = implode('/', $segments);
         }
 
-        $baseUrl = env('MZCAPI_BASEURL');
+        $baseUrl =config('app.MZCAPI_BASEURL');
 
         return $baseUrl . '/' . $segments;
     }

@@ -149,7 +149,7 @@ class ServiceBase
      */
     public function getSubAccountCredentials($account = null, $scope = false, $otherHeaders = array())
     {
-        $account = (null != $account) ? $account : env('MZCAPI_ACCT');
+        $account = (null != $account) ? $account : config('app.MZCAPI_ACCT');
 
         $headers =             [
             'Accept'    => 'application/vnd.mzcapi.v2+json',
@@ -164,8 +164,8 @@ class ServiceBase
         $headers = array_merge($headers, $otherHeaders);
 
         return new Credentials(
-            env('MZCAPI_USER'),
-            env('MZCAPI_PASS'),
+            config('app.MZCAPI_USER'),
+            config('app.MZCAPI_PASS'),
             $headers
 
         );
