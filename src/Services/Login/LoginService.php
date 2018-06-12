@@ -2,7 +2,7 @@
 
 namespace Mobilozophy\MZCAPILaravel\Services\Login;
 
-use Mobilozophy\MZCAPILaravel\Services\Api\Loyalty\LoginAPIService;
+use Mobilozophy\MZCAPILaravel\Services\Api\Login\LoginAPIService;
 use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
 
 /**

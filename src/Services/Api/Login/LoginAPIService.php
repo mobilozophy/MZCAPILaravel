@@ -6,7 +6,7 @@ use Mobilozophy\MZCAPILaravel\Services\Api\AbstractAPIService;
 use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
 use Mobilozophy\MZCAPILaravel\Services\Api\MZCAPIAPIService;
 
-class LoyaltyAPIService extends MZCAPIAPIService
+class LoginAPIService extends MZCAPIAPIService
 {
     const ENDPOINT = 'gplogin';
 
