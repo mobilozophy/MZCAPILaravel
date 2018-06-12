@@ -14,7 +14,7 @@ class LoginService extends ServiceBase
 {
 
     /**
-     * LoyaltyService constructor.
+     * LoginService constructor.
      * @param LoginAPIService $loyaltyAPIService
      */
     public function __construct(LoginAPIService $loginAPIService) {
@@ -42,6 +42,35 @@ class LoginService extends ServiceBase
                 return false;
             }
         } catch (\Exception $e)
+        {
+            return false;
+        }
+    }
+
+    /**
+     * @param bool|string $scope The scope to apply to call (ex. with-children will scope to all child accounts).
+     * @param array $otherHeaders Other headers to apply to call.
+     * @param string $storeId The Id of the store.
+     *
+     * @return bool|mixed
+     */
+    public function apiLoginWithDetails($scope = false, $otherHeaders=[], $storeId = null)
+    {
+        try
+        {
+            $response = $this->apiService->confirmLogin($this->getSubAccountCredentials());
+
+
+            if ($response->getStatusCode() == 200)
+            {
+                return json_decode($response->getBody()->getContents());
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (\Exception $e)
         {
             return false;
         }

@@ -11,14 +11,25 @@ class LoginAPIService extends MZCAPIAPIService
     const ENDPOINT = 'gplogin';
 
     /**
-     * Send a request to retrieve a loyalty program.
+     * Send a request to retrieve a Login resource.
      * @param Credentials $credentials
-     * @param int         $accountId
-     * @param null        $storeId
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return
      */
     public function get(Credentials $credentials, $id, $include = [])
+    {
+        $requestUrl = $this->getEndpointRequestUrl();
+
+        $response = $this->httpClient->get($requestUrl, [
+            'headers' => $credentials->getHeaders(),
+            'auth'    => $credentials->toArray()
+        ]);
+
+        return $response;
+
+    }
+
+    public function confirmLogin(Credentials $credentials)
     {
         $requestUrl = $this->getEndpointRequestUrl();
 
@@ -28,7 +39,6 @@ class LoginAPIService extends MZCAPIAPIService
         ]);
 
         return $response;
-
     }
 
 }
