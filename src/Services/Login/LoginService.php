@@ -54,11 +54,11 @@ class LoginService extends ServiceBase
      *
      * @return bool|mixed
      */
-    public function apiLoginWithDetails($scope = false, $otherHeaders=[], $storeId = null)
+    public function apiLoginWithDetails($user, $pass, $scope = false, $otherHeaders=[], $storeId = null)
     {
         try
         {
-            $response = $this->apiService->confirmLogin($this->getSubAccountCredentials());
+            $response = $this->apiService->confirmLogin($this->customSubAccountCredentials($user, $pass));
 
 
             if ($response->getStatusCode() == 200)

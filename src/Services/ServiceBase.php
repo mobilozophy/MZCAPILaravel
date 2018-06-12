@@ -139,6 +139,37 @@ class ServiceBase
         }
     }
 
+    /**
+     * Get Account Credentials for API Calls
+     * @param null|string $account The account id of the account to perform this call on.
+     * @param bool|string $scope The scope to apply to call (ex. with-children will scope to all child accounts).
+     * @param array $otherHeaders Other headers to apply to call.
+     * @return Credentials
+     */
+    public function customSubAccountCredentials($user, $pass, $account = null, $scope = false, $otherHeaders = array())
+    {
+        $account = (null != $account) ? $account : config('app.MZCAPI_ACCT');
+
+        $headers =             [
+            'Accept'    => 'application/vnd.mzcapi.v2+json',
+            'MZAccount' => $account
+        ];
+
+        if($scope)
+        {
+            $headers['MZScope'] = $scope;
+        }
+
+        $headers = array_merge($headers, $otherHeaders);
+
+        return new Credentials(
+            $user,
+            $pass,
+            $headers
+
+        );
+    }
+
 
     /**
      * Get Account Credentials for API Calls
