@@ -18,7 +18,7 @@ class LoginAPIService extends MZCAPIAPIService
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function get(Credentials $credentials)
+    public function get(Credentials $credentials, $id, $include = [])
     {
         $requestUrl = $this->getEndpointRequestUrl();
 

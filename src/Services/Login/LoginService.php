@@ -15,7 +15,7 @@ class LoginService extends ServiceBase
 
     /**
      * LoyaltyService constructor.
-     * @param LoyaltyAPIService $loyaltyAPIService
+     * @param LoginAPIService $loyaltyAPIService
      */
     public function __construct(LoginAPIService $loginAPIService) {
         $this->apiService = $loginAPIService;
@@ -29,10 +29,10 @@ class LoginService extends ServiceBase
      * @param string $storeId The Id of the store.
      * @return bool|mixed
      */
-    public function get($scope = false, $otherHeaders=[], $storeId = null)
+    public function get($id, $account_uuid= null, $scope = false, $otherHeaders=[], $storeId = null)
     {
         try {
-            $response = $this->apiService->get($this->getSubAccountCredentials(null,$scope, $otherHeaders));
+            $response = $this->apiService->get($this->getSubAccountCredentials(null,$scope, $otherHeaders),$id, []);
 
             if ($response->getStatusCode() == 200) {
                 return json_decode($response->getBody()->getContents());
