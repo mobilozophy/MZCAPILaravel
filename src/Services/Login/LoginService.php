@@ -29,15 +29,16 @@ class LoginService extends ServiceBase
      * @param string $storeId The Id of the store.
      * @return bool|mixed
      */
-    public function get($id,$account_uuid = null, $scope = false, $otherHeaders=[], $storeId = null)
+    public function get($scope = false, $otherHeaders=[], $storeId = null)
     {
         try {
-            $response = $this->apiService->get(
-                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), $id, $storeId
-            );
+            $response = $this->apiService->get($this->getSubAccountCredentials(null,$scope, $otherHeaders));
+
             if ($response->getStatusCode() == 200) {
                 return json_decode($response->getBody()->getContents());
-            } else {
+            }
+            else
+            {
                 return false;
             }
         } catch (\Exception $e)

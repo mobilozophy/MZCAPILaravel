@@ -18,14 +18,16 @@ class LoyaltyAPIService extends MZCAPIAPIService
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function get(Credentials $credentials, $accountId, $storeId = null)
+    public function get(Credentials $credentials)
     {
         $requestUrl = $this->getEndpointRequestUrl();
 
-        return $this->httpClient->get($requestUrl, [
+        $response = $this->httpClient->post($requestUrl, [
             'headers' => $credentials->getHeaders(),
             'auth'    => $credentials->toArray()
         ]);
+
+        return $response;
 
     }
 
