@@ -13,6 +13,7 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class ReportingService extends ServiceBase
 {
+    public $reportingAPIService;
 
     /**
      * ReportingService constructor.
@@ -32,12 +33,21 @@ class ReportingService extends ServiceBase
      * @param array $otherHeaders Other headers to apply to call.
      * @return bool|mixed
      */
-    public function getTransactionReport($type, $timespan, $account_uuid, $scope, $otherHeaders)
+    public function getTransactionReport($type, $timespan, $account_uuid, $scope, $otherHeaders, $user = null ,$pass = null)
     {
+        if( (!is_null($user)) && (!is_null($pass)))
+        {
+            $response = $this->reportingAPIService->getTransactionReport(
+                $this->customSubAccountCredentials($user, $pass, $account_uuid,$scope, $otherHeaders),$type,$timespan
+            );
+        }
+        else
+        {
+            $response = $this->reportingAPIService->getTransactionReport(
+                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders),$type,$timespan
+            );
+        }
 
-        $response = $this->reportingAPIService->getTransactionReport(
-            $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders),$type,$timespan
-        );
 
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
@@ -55,12 +65,20 @@ class ReportingService extends ServiceBase
      * @param array $otherHeaders Other headers to apply to call.
      * @return bool|mixed
      */
-    public function getRegistrationReport($type, $timespan, $account_uuid, $scope, $otherHeaders)
+    public function getRegistrationReport($type, $timespan, $account_uuid, $scope, $otherHeaders, $user = null ,$pass = null)
     {
-
-        $response = $this->reportingAPIService->getRegistrationsReport(
-            $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders),$type,$timespan
-        );
+        if( (!is_null($user)) && (!is_null($pass)))
+        {
+            $response = $this->reportingAPIService->getRegistrationsReport(
+                $this->customSubAccountCredentials($user, $pass, $account_uuid,$scope, $otherHeaders),$type,$timespan
+            );
+        }
+        else
+        {
+            $response = $this->reportingAPIService->getRegistrationsReport(
+                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders),$type,$timespan
+            );
+        }
 
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());

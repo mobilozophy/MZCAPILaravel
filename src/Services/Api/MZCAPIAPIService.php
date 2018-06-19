@@ -84,11 +84,12 @@ class MZCAPIAPIService extends AbstractAPIService
      * Send a request to retrieve all resources.
      *
      * @param Credentials $credentials
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @return mixed
      */
     public function getAll(Credentials $credentials)
     {
         $requestUrl = $this->getEndpointRequestUrl();
+
         return $this->httpClient->get(
             $requestUrl,
             $this->generateOptions($credentials)
