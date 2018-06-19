@@ -48,12 +48,23 @@ class CouponService extends ServiceBase
      * @param array $otherHeaders Other headers to apply to call.
      * @return bool|mixed
      */
-    public function getAllForAvailability($availability, $account_uuid = null, $scope = false, $otherHeaders=[])
+    public function getAllForAvailability($availability, $account_uuid = null, $scope = false, $otherHeaders=[], $user = null, $pass = null)
     {
         try {
-            $response = $this->apiService->getAllForAvailability(
-                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), $availability
-            );
+            if( (!is_null($user)) && (!is_null($pass)))
+            {
+                $response = $this->apiService->getAllForAvailability(
+                    $this->customSubAccountCredentials($user, $pass, $account_uuid,$scope, $otherHeaders), $availability
+                );
+
+            }
+            else
+            {
+                $response = $this->apiService->getAllForAvailability(
+                    $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), $availability
+                );
+            }
+
             if ($response->getStatusCode() == 200) {
                 return json_decode($response->getBody()->getContents());
             } else

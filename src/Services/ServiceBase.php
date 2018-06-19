@@ -105,11 +105,21 @@ class ServiceBase
      * @param array $otherHeaders Other headers to apply to call.
      * @return bool|mixed
      */
-    public function getall($account_uuid = null, $scope = false, $otherHeaders=[])
+    public function getall($account_uuid = null, $scope = false, $otherHeaders=[], $user = null ,$pass = null)
     {
-        $response = $this->apiService->getAll(
-            $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders)
-        );
+        if( (!is_null($user)) && (!is_null($pass)))
+        {
+            $response = $this->apiService->getAll(
+                $this->customSubAccountCredentials($user, $pass, $account_uuid,$scope, $otherHeaders)
+            );
+        }
+        else
+        {
+            $response = $this->apiService->getAll(
+                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders)
+            );
+        }
+
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
         } else
