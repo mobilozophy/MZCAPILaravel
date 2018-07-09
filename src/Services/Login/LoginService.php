@@ -4,6 +4,7 @@ namespace Mobilozophy\MZCAPILaravel\Services\Login;
 
 use Mobilozophy\MZCAPILaravel\Services\Api\Login\LoginAPIService;
 use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class LoginService
@@ -60,6 +61,7 @@ class LoginService extends ServiceBase
         {
             $response = $this->apiService->confirmLogin($this->customSubAccountCredentials($user, $pass));
 
+            Log::info(json_encode($response));
 
             if ($response->getStatusCode() == 200)
             {
@@ -72,6 +74,7 @@ class LoginService extends ServiceBase
         }
         catch (\Exception $e)
         {
+            Log::info($e->getMessage());
             return false;
         }
     }
