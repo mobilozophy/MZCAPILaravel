@@ -5,6 +5,7 @@ namespace Mobilozophy\MZCAPILaravel\Services\Api\Login;
 use Mobilozophy\MZCAPILaravel\Services\Api\AbstractAPIService;
 use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
 use Mobilozophy\MZCAPILaravel\Services\Api\MZCAPIAPIService;
+use Illuminate\Support\Facades\Log;
 
 class LoginAPIService extends MZCAPIAPIService
 {
@@ -20,6 +21,8 @@ class LoginAPIService extends MZCAPIAPIService
     {
         $requestUrl = $this->getEndpointRequestUrl();
 
+        Log::info($requestUrl);
+
         $response = $this->httpClient->get($requestUrl, [
             'headers' => $credentials->getHeaders(),
             'auth'    => $credentials->toArray()
@@ -32,6 +35,8 @@ class LoginAPIService extends MZCAPIAPIService
     public function confirmLogin(Credentials $credentials)
     {
         $requestUrl = $this->getEndpointRequestUrl();
+
+        Log::info($requestUrl);
 
         $response = $this->httpClient->post($requestUrl, [
             'headers' => $credentials->getHeaders(),
