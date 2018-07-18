@@ -27,6 +27,9 @@ class SparkService extends ServiceBase
     {
         $results = false;
 
+        //@todo - make this reach out to the API for the answer
+        $results = true;
+
         return $results;
     }
 }
