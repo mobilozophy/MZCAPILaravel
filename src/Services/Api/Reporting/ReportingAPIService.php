@@ -37,4 +37,15 @@ class ReportingAPIService extends MZCAPIAPIService
             'auth' => $credentials->toArray()
         ]);
     }
+
+    public function getMerchantReport(Credentials $credentials)
+    {
+        $requestUrl = $this->getEndpointRequestUrl('merchant');
+
+        return $this->httpClient->get($requestUrl, [
+            'headers' => $credentials->getHeaders(),
+            'auth' => $credentials->toArray()
+        ]);
+
+    }
 }

@@ -89,7 +89,31 @@ class ReportingService extends ServiceBase
     }
 
 
+    /**
+     * @return bool|mixed
+     */
+    public function getMerchantReport($account_uuid, $scope = false, $otherHeaders=[])
+    {
+        try
+        {
+            $response = $this->reportingAPIService->getMerchantReport(
+                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders)
+            );
 
+            if ($response->getStatusCode() == 200)
+            {
+                return json_decode($response->getBody()->getContents(), true);
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (\Exception $e)
+        {
+            return false;
+        }
+    }
 
 
 }
