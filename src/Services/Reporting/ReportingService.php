@@ -115,5 +115,28 @@ class ReportingService extends ServiceBase
         }
     }
 
+    public function getConsumerActivityRegistrations($account_uuid, $scope = false, $otherHeaders=[])
+    {
+        try
+        {
+            $response = $this->reportingAPIService->getConsumerActivityReport(
+                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders)
+            );
+
+            if ($response->getStatusCode() == 200)
+            {
+                return json_decode($response->getBody()->getContents(), true);
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (\Exception $e)
+        {
+            return false;
+        }
+    }
+
 
 }

@@ -48,4 +48,15 @@ class ReportingAPIService extends MZCAPIAPIService
         ]);
 
     }
+
+    public function getConsumerActivityReport(Credentials $credentials)
+    {
+        $requestUrl = $this->getEndpointRequestUrl('consumer/activity');
+
+        return $this->httpClient->get($requestUrl, [
+            'headers' => $credentials->getHeaders(),
+            'auth' => $credentials->toArray()
+        ]);
+
+    }
 }
