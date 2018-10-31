@@ -138,5 +138,28 @@ class ReportingService extends ServiceBase
         }
     }
 
+    public function getMemberReportActivity($account_uuid, $reg, $type, $scope = false, $otherHeaders=[])
+    {
+        try
+        {
+            $response = $this->reportingAPIService->getMemberReportActivity(
+                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders),
+                $reg, $type);
+
+            if ($response->getStatusCode() == 200)
+            {
+                return json_decode($response->getBody()->getContents(), true);
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (\Exception $e)
+        {
+            return false;
+        }
+    }
+
 
 }
