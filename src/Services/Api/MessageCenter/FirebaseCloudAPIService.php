@@ -17,10 +17,11 @@ class FirebaseCloudAPIService extends MZCAPIAPIService
      * @param integer $accountId
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getTransactionReport(Credentials $credentials, array $data)
+    public function makePostCall(Credentials $credentials, array $data = [], $segment = '')
     {
 
-        $requestUrl = $this->getEndpointRequestUrl('new');
+        $requestUrl = $this->getEndpointRequestUrl($segment);
+
         return $this->httpClient->post($requestUrl, [
             'headers' => $credentials->getHeaders(),
             'auth' => $credentials->toArray(),

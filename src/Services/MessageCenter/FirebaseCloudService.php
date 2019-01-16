@@ -19,4 +19,27 @@ class FirebaseCloudService extends ServiceBase
     {
         $this->fireBaseApiSvc = $firebase;
     }
+
+    public function createNewNotification($data, $account_uuid, $scope = false, $otherHeaders=[])
+    {
+        try
+        {
+            $response = $this->fireBaseApiSvc->makePostCall(
+                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), $data, 'new'
+            );
+
+            if ($response->getStatusCode() == 200)
+            {
+                return json_decode($response->getBody()->getContents(), true);
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (\Exception $e)
+        {
+            return false;
+        }
+    }
 }
