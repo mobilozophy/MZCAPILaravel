@@ -39,7 +39,7 @@ class FirebaseCloudService extends ServiceBase
         }
         catch (\Exception $e)
         {
-            return false;
+            return $e->getMessage();
         }
     }
 }
