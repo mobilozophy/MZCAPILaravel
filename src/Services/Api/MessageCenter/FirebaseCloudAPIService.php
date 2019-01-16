@@ -8,7 +8,7 @@ use Mobilozophy\MZCAPILaravel\Services\Api\MZCAPIAPIService;
 
 class FirebaseCloudAPIService extends MZCAPIAPIService
 {
-    const ENDPOINT = '/messages/firebase';
+    const ENDPOINT = 'messages/firebase';
 
     /**
      * Send a request to create a new firebase notification record.
