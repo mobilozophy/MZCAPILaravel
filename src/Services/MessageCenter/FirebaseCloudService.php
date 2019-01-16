@@ -2,7 +2,6 @@
 
 namespace Mobilozophy\MZCAPILaravel\Services\MessageCenter;
 
-use Illuminate\Support\Facades\Log;
 use Mobilozophy\MZCAPILaravel\Services\Api\MessageCenter\FirebaseCloudAPIService;
 use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
 
@@ -31,7 +30,6 @@ class FirebaseCloudService extends ServiceBase
 
             if ($response->getStatusCode() == 200)
             {
-                Log::info($response);
                 return json_decode($response->getBody()->getContents(), true);
             }
             else
@@ -41,7 +39,6 @@ class FirebaseCloudService extends ServiceBase
         }
         catch (\Exception $e)
         {
-            Log::info($e->getMessage());
             return false;
         }
     }
