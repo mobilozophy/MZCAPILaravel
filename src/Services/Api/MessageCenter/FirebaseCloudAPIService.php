@@ -11,11 +11,11 @@ class FirebaseCloudAPIService extends MZCAPIAPIService
     const ENDPOINT = 'messages/firebase';
 
     /**
-     * Send a request to create a new firebase notification record.
+     * Send a post request to create to an MZ-Firebase related resource.
      *
      * @param Credentials $credentials
      * @param integer $accountId
-     * @return \GuzzleHttp\Promise\PromiseInterface
+     * @return mixed
      */
     public function makePostCall(Credentials $credentials, array $data = [], $segment = '')
     {
@@ -26,6 +26,24 @@ class FirebaseCloudAPIService extends MZCAPIAPIService
             'headers' => $credentials->getHeaders(),
             'auth' => $credentials->toArray(),
             'form_params' => $data
+        ]);
+    }
+
+    /**
+     * Send a post request to create to an MZ-Firebase related resource.
+     *
+     * @param Credentials $credentials
+     * @param integer $accountId
+     * @return mixed
+     */
+    public function makeGetCall(Credentials $credentials, $segment = '')
+    {
+
+        $requestUrl = $this->getEndpointRequestUrl($segment);
+
+        return $this->httpClient->get($requestUrl, [
+            'headers' => $credentials->getHeaders(),
+            'auth' => $credentials->toArray()
         ]);
     }
 }

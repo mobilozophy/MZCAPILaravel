@@ -20,6 +20,30 @@ class FirebaseCloudService extends ServiceBase
         $this->fireBaseApiSvc = $firebase;
     }
 
+    public function getAllNotifications($account_uuid, $scope = false, $otherHeaders=[])
+    {
+        try
+        {
+            $response = $this->fireBaseApiSvc->makeGetCall(
+                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), 'notifications'
+            );
+
+            if ($response->getStatusCode() == 200)
+            {
+                $json_string = $response->getBody()->getContents();
+                return json_decode($json_string, true);
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (\Exception $e)
+        {
+            return $e->getMessage();
+        }
+    }
+
     public function createNewNotification($data, $account_uuid, $scope = false, $otherHeaders=[])
     {
         try
