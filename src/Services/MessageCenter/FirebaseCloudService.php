@@ -30,7 +30,8 @@ class FirebaseCloudService extends ServiceBase
 
             if ($response->getStatusCode() == 200)
             {
-                return json_decode($response->getBody()->getContents(), true);
+                $json_string = $response->getBody()->getContents();
+                return json_decode($json_string, true);
             }
             else
             {
@@ -39,7 +40,7 @@ class FirebaseCloudService extends ServiceBase
         }
         catch (\Exception $e)
         {
-            return false;
+            return $e->getMessage();
         }
     }
 }
