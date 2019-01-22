@@ -67,4 +67,28 @@ class FirebaseCloudService extends ServiceBase
             return $e->getMessage();
         }
     }
+
+    public function deleteOldNotification($note_uuid, $account_uuid, $scope = false, $otherHeaders=[])
+    {
+        try
+        {
+            $response = $this->fireBaseApiSvc->makeDeleteCall(
+                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), $note_uuid, 'delete'
+            );
+
+            if ($response->getStatusCode() == 200)
+            {
+                $json_string = $response->getBody()->getContents();
+                return json_decode($json_string, true);
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (\Exception $e)
+        {
+            return $e->getMessage();
+        }
+    }
 }

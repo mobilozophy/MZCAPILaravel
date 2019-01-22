@@ -46,4 +46,25 @@ class FirebaseCloudAPIService extends MZCAPIAPIService
             'auth' => $credentials->toArray()
         ]);
     }
+
+    /**
+     * Send a delete request to create to an MZ-Firebase related resource.
+     *
+     * @param Credentials $credentials
+     * @param integer $accountId
+     * @return mixed
+     */
+    public function makeDeleteCall(Credentials $credentials, $note_id, $segment = '')
+    {
+
+        $requestUrl = $this->getEndpointRequestUrl($segment);
+
+        return $this->httpClient->delete($requestUrl, [
+            'headers' => $credentials->getHeaders(),
+            'auth' => $credentials->toArray(),
+            'form_params' => ['notification_id' => $note_id]
+        ]);
+    }
+
+
 }
