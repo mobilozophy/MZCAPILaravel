@@ -20,6 +20,30 @@ class FirebaseCloudService extends ServiceBase
         $this->fireBaseApiSvc = $firebase;
     }
 
+    public function getFirebaseUsers($account_uuid, $scope = false, $otherHeaders=[])
+    {
+        try
+        {
+            $response = $this->fireBaseApiSvc->makeGetCall(
+                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), 'registrations'
+            );
+
+            if ($response->getStatusCode() == 200)
+            {
+                $json_string = $response->getBody()->getContents();
+                return json_decode($json_string, true);
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (\Exception $e)
+        {
+            return $e->getMessage();
+        }
+    }
+
     public function getAllNotifications($account_uuid, $scope = false, $otherHeaders=[])
     {
         try
@@ -68,7 +92,7 @@ class FirebaseCloudService extends ServiceBase
         }
     }
 
-    public function EditOldNotification($data, $account_uuid, $scope = false, $otherHeaders=[])
+    public function editOldNotification($data, $account_uuid, $scope = false, $otherHeaders=[])
     {
         try
         {
