@@ -12,7 +12,6 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class MessageTemplateService extends ServiceBase
 {
-
     /**
      * MessageTemplateService constructor.
      * @param MessageTemplateAPIService $messageTemplateAPIService
@@ -22,6 +21,4 @@ class MessageTemplateService extends ServiceBase
     ) {
         $this->apiService = $messageTemplateAPIService;
     }
-
-
 }

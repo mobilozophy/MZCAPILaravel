@@ -9,7 +9,6 @@ class ValidationTokenAPIService extends MZCAPIAPIService
 {
     const ENDPOINT = 'validation-token';
 
-
     public function getByToken(Credentials $credentials, $token)
     {
         $requestUrl = $this->getEndpointRequestUrl([$token]);
@@ -19,5 +18,4 @@ class ValidationTokenAPIService extends MZCAPIAPIService
             'auth' => $credentials->toArray()
         ]);
     }
-
 }

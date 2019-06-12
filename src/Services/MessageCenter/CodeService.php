@@ -2,7 +2,6 @@
 
 namespace Mobilozophy\MZCAPILaravel\Services\MessageCenter;
 
-
 use Mobilozophy\MZCAPILaravel\Services\Api\MessageCenter\CodeAPIService;
 use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
 
@@ -13,16 +12,12 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class CodeService extends ServiceBase
 {
-
     /**
      * CodeService constructor.
      * @param CodeAPIService $codeAPIService
      */
-    public function __construct(
-        CodeAPIService $codeAPIService
-    ) {
+    public function __construct(CodeAPIService $codeAPIService)
+    {
         $this->apiService = $codeAPIService;
     }
-
-
 }

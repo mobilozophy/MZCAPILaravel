@@ -7,14 +7,12 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
 
 class StoreService extends ServiceBase
 {
-
     /**
      * StoreService constructor.
      * @param StoreAPIService $storeAPIService
      */
-    public function __construct(
-        StoreAPIService $storeAPIService
-    ) {
+    public function __construct(StoreAPIService $storeAPIService)
+    {
         $this->apiService = $storeAPIService;
     }
 
@@ -29,19 +27,34 @@ class StoreService extends ServiceBase
      * @param null|string $registrationId The registration If of the user making the request.
      * @return bool|string
      */
-    public function getByLocation($lat, $lon, $rad, $measurement= 'miles', $include = null,$account_uuid = null, $scope = false, $registrationId =null)
-    {
+    public function getByLocation(
+        $lat,
+        $lon,
+        $rad,
+        $measurement = 'miles',
+        $include = null,
+        $account_uuid = null,
+        $scope = false,
+        $registrationId = null
+    ) {
         try {
             $response = $this->apiService->getByLocation(
-                $this->getSubAccountCredentials($account_uuid,$scope,['MZRegistration'=>$registrationId]), $lat, $lon, $rad, $measurement, $include, $account_uuid
+                $this->getSubAccountCredentials($account_uuid, $scope, [
+                    'MZRegistration' => $registrationId
+                ]),
+                $lat,
+                $lon,
+                $rad,
+                $measurement,
+                $include,
+                $account_uuid
             );
             if ($response->getStatusCode() == 200) {
                 return $response->getBody()->getContents();
             } else {
                 return false;
             }
-        } catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return false;
         }
     }
@@ -58,46 +71,57 @@ class StoreService extends ServiceBase
      * @param null|string $registrationId The registration If of the user making the request.
      * @return bool|string
      */
-    public function getScopeableResourceByLocation($scopeResource, $scopeResource_id,$lat, $lon, $rad, $registrationId, $measurement= 'miles',  $account_uuid = null, $scope = false, $location_id = false)
-    {
+    public function getScopeableResourceByLocation(
+        $scopeResource,
+        $scopeResource_id,
+        $lat,
+        $lon,
+        $rad,
+        $registrationId,
+        $measurement = 'miles',
+        $account_uuid = null,
+        $scope = false,
+        $location_id = false
+    ) {
         try {
             $response = $this->apiService->getScopeableResourceByLocation(
-                $this->getSubAccountCredentials(
-                    $account_uuid
-                    ,$scope
-                    ,['MZRegistration'=>$registrationId])
+                $this->getSubAccountCredentials($account_uuid, $scope, [
+                    'MZRegistration' => $registrationId
+                ]),
 
-                    ,$scopeResource
-                    ,$scopeResource_id
-                    ,$lat
-                    ,$lon
-                    ,$rad
-                    ,$measurement
-                    ,$account_uuid
-                    ,$location_id
+                $scopeResource,
+                $scopeResource_id,
+                $lat,
+                $lon,
+                $rad,
+                $measurement,
+                $account_uuid,
+                $location_id
             );
             if ($response->getStatusCode() == 200) {
                 return $response->getBody()->getContents();
             } else {
                 return false;
             }
-        } catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return false;
         }
     }
 
-    public function pairBeaconsToLocation($location_id, $device_serial, $device_manuf, $account_uuid = null, $scope=false)
-    {
+    public function pairBeaconsToLocation(
+        $location_id,
+        $device_serial,
+        $device_manuf,
+        $account_uuid = null,
+        $scope = false
+    ) {
         try {
             $response = $this->apiService->pairBeaconsToLocation(
-                $this->getSubAccountCredentials(
-                    $account_uuid
-                    ,$scope)
+                $this->getSubAccountCredentials($account_uuid, $scope),
 
-                ,$location_id
-                ,$device_serial
-                ,$device_manuf
+                $location_id,
+                $device_serial,
+                $device_manuf
             );
 
             if ($response->getStatusCode() == 200) {
@@ -105,23 +129,24 @@ class StoreService extends ServiceBase
             } else {
                 return false;
             }
-
-        } catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return false;
         }
     }
 
-    public function removeBeaconsFromLocation($location_id, $device_serial, $device_manuf, $account_uuid = null, $scope=false)
-    {
+    public function removeBeaconsFromLocation(
+        $location_id,
+        $device_serial,
+        $device_manuf,
+        $account_uuid = null,
+        $scope = false
+    ) {
         try {
             $response = $this->apiService->deleteBeacon(
-                $this->getSubAccountCredentials(
-                    $account_uuid
-                    ,$scope)
-                ,$location_id
-                ,$device_serial
-                ,$device_manuf
+                $this->getSubAccountCredentials($account_uuid, $scope),
+                $location_id,
+                $device_serial,
+                $device_manuf
             );
 
             if ($response->getStatusCode() == 200) {
@@ -129,13 +154,8 @@ class StoreService extends ServiceBase
             } else {
                 return false;
             }
-
-        } catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return false;
         }
     }
-
-
-
 }

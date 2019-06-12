@@ -11,13 +11,12 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class UserService extends ServiceBase
 {
-
     /**
      * UserService constructor.
      * @param UserAPIService $service
      */
-    public function __construct(UserAPIService $service) {
+    public function __construct(UserAPIService $service)
+    {
         $this->apiService = $service;
     }
-
 }

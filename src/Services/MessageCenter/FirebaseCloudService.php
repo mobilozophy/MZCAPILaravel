@@ -20,122 +20,138 @@ class FirebaseCloudService extends ServiceBase
         $this->fireBaseApiSvc = $firebase;
     }
 
-    public function getFirebaseUsers($account_uuid, $scope = false, $otherHeaders=[])
-    {
-        try
-        {
+    public function getFirebaseUsers(
+        $account_uuid,
+        $scope = false,
+        $otherHeaders = []
+    ) {
+        try {
             $response = $this->fireBaseApiSvc->makeGetCall(
-                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), 'registrations'
+                $this->getSubAccountCredentials(
+                    $account_uuid,
+                    $scope,
+                    $otherHeaders
+                ),
+                'registrations'
             );
 
-            if ($response->getStatusCode() == 200)
-            {
+            if ($response->getStatusCode() == 200) {
                 $json_string = $response->getBody()->getContents();
                 return json_decode($json_string, true);
-            }
-            else
-            {
+            } else {
                 return false;
             }
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
 
-    public function getAllNotifications($account_uuid, $scope = false, $otherHeaders=[])
-    {
-        try
-        {
+    public function getAllNotifications(
+        $account_uuid,
+        $scope = false,
+        $otherHeaders = []
+    ) {
+        try {
             $response = $this->fireBaseApiSvc->makeGetCall(
-                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), 'notifications'
+                $this->getSubAccountCredentials(
+                    $account_uuid,
+                    $scope,
+                    $otherHeaders
+                ),
+                'notifications'
             );
 
-            if ($response->getStatusCode() == 200)
-            {
+            if ($response->getStatusCode() == 200) {
                 $json_string = $response->getBody()->getContents();
                 return json_decode($json_string, true);
-            }
-            else
-            {
+            } else {
                 return false;
             }
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
 
-    public function createNewNotification($data, $account_uuid, $scope = false, $otherHeaders=[])
-    {
-        try
-        {
+    public function createNewNotification(
+        $data,
+        $account_uuid,
+        $scope = false,
+        $otherHeaders = []
+    ) {
+        try {
             $response = $this->fireBaseApiSvc->makePostCall(
-                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), $data, 'new'
+                $this->getSubAccountCredentials(
+                    $account_uuid,
+                    $scope,
+                    $otherHeaders
+                ),
+                $data,
+                'new'
             );
 
-            if ($response->getStatusCode() == 200)
-            {
+            if ($response->getStatusCode() == 200) {
                 $json_string = $response->getBody()->getContents();
                 return json_decode($json_string, true);
-            }
-            else
-            {
+            } else {
                 return false;
             }
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
 
-    public function editOldNotification($data, $account_uuid, $scope = false, $otherHeaders=[])
-    {
-        try
-        {
+    public function editOldNotification(
+        $data,
+        $account_uuid,
+        $scope = false,
+        $otherHeaders = []
+    ) {
+        try {
             $response = $this->fireBaseApiSvc->makePostCall(
-                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), $data, 'edit'
+                $this->getSubAccountCredentials(
+                    $account_uuid,
+                    $scope,
+                    $otherHeaders
+                ),
+                $data,
+                'edit'
             );
 
-            if ($response->getStatusCode() == 200)
-            {
+            if ($response->getStatusCode() == 200) {
                 $json_string = $response->getBody()->getContents();
                 return json_decode($json_string, true);
-            }
-            else
-            {
+            } else {
                 return false;
             }
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
 
-    public function deleteOldNotification($note_uuid, $account_uuid, $scope = false, $otherHeaders=[])
-    {
-        try
-        {
+    public function deleteOldNotification(
+        $note_uuid,
+        $account_uuid,
+        $scope = false,
+        $otherHeaders = []
+    ) {
+        try {
             $response = $this->fireBaseApiSvc->makeDeleteCall(
-                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders), $note_uuid, 'delete'
+                $this->getSubAccountCredentials(
+                    $account_uuid,
+                    $scope,
+                    $otherHeaders
+                ),
+                $note_uuid,
+                'delete'
             );
 
-            if ($response->getStatusCode() == 200)
-            {
+            if ($response->getStatusCode() == 200) {
                 $json_string = $response->getBody()->getContents();
                 return json_decode($json_string, true);
-            }
-            else
-            {
+            } else {
                 return false;
             }
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }

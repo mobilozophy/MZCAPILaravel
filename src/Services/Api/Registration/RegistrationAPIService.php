@@ -12,39 +12,39 @@ class RegistrationAPIService extends MZCAPIAPIService
 
     public function login(Credentials $credentials, array $params)
     {
-        $requestUrl = $this->getEndpointRequestUrl().'/login';
+        $requestUrl = $this->getEndpointRequestUrl() . '/login';
 
         return $this->httpClient->post($requestUrl, [
-            'headers'     => $credentials->getHeaders(),
-            'auth'        => $credentials->toArray(),
+            'headers' => $credentials->getHeaders(),
+            'auth' => $credentials->toArray(),
             'form_params' => $params
         ]);
-
     }
 
-    public function loginWithMerchantIdentifier(Credentials $credentials, array $params)
-    {
-        $requestUrl = $this->getEndpointRequestUrl().'/login/merchant_identifier';
+    public function loginWithMerchantIdentifier(
+        Credentials $credentials,
+        array $params
+    ) {
+        $requestUrl =
+            $this->getEndpointRequestUrl() . '/login/merchant_identifier';
 
         return $this->httpClient->post($requestUrl, [
-            'headers'     => $credentials->getHeaders(),
-            'auth'        => $credentials->toArray(),
+            'headers' => $credentials->getHeaders(),
+            'auth' => $credentials->toArray(),
             'form_params' => $params
         ]);
-
     }
 
-    public function locateRegisteredUserByEmail(Credentials $credentials, array $params)
-    {
-        $requestUrl = $this->getEndpointRequestUrl().'/lookup/email';
+    public function locateRegisteredUserByEmail(
+        Credentials $credentials,
+        array $params
+    ) {
+        $requestUrl = $this->getEndpointRequestUrl() . '/lookup/email';
 
         return $this->httpClient->post($requestUrl, [
-            'headers'     => $credentials->getHeaders(),
-            'auth'        => $credentials->toArray(),
+            'headers' => $credentials->getHeaders(),
+            'auth' => $credentials->toArray(),
             'form_params' => $params
         ]);
-
     }
-
-
 }

@@ -11,9 +11,8 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class BeaconService extends ServiceBase
 {
-
-    public function __construct(BeaconAPIService $apiService) {
+    public function __construct(BeaconAPIService $apiService)
+    {
         $this->apiService = $apiService;
     }
-
 }

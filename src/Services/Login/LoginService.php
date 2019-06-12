@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Log;
  */
 class LoginService extends ServiceBase
 {
-
     /**
      * LoginService constructor.
      * @param LoginAPIService $loyaltyAPIService
      */
-    public function __construct(LoginAPIService $loginAPIService) {
+    public function __construct(LoginAPIService $loginAPIService)
+    {
         $this->apiService = $loginAPIService;
     }
 
@@ -30,20 +30,26 @@ class LoginService extends ServiceBase
      * @param string $storeId The Id of the store.
      * @return bool|mixed
      */
-    public function get($id, $account_uuid= null, $scope = false, $otherHeaders=[], $storeId = null)
-    {
+    public function get(
+        $id,
+        $account_uuid = null,
+        $scope = false,
+        $otherHeaders = [],
+        $storeId = null
+    ) {
         try {
-            $response = $this->apiService->get($this->getSubAccountCredentials(null,$scope, $otherHeaders),$id, []);
+            $response = $this->apiService->get(
+                $this->getSubAccountCredentials(null, $scope, $otherHeaders),
+                $id,
+                []
+            );
 
             if ($response->getStatusCode() == 200) {
                 return json_decode($response->getBody()->getContents());
-            }
-            else
-            {
+            } else {
                 return false;
             }
-        } catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return false;
         }
     }
@@ -55,30 +61,28 @@ class LoginService extends ServiceBase
      *
      * @return bool|mixed
      */
-    public function apiLoginWithDetails($user, $pass, $scope = false, $otherHeaders=[], $storeId = null)
-    {
-        try
-        {
-            $response = $this->apiService->confirmLogin($this->customSubAccountCredentials($user, $pass));
+    public function apiLoginWithDetails(
+        $user,
+        $pass,
+        $scope = false,
+        $otherHeaders = [],
+        $storeId = null
+    ) {
+        try {
+            $response = $this->apiService->confirmLogin(
+                $this->customSubAccountCredentials($user, $pass)
+            );
 
             Log::info(json_encode($response));
 
-            if ($response->getStatusCode() == 200)
-            {
+            if ($response->getStatusCode() == 200) {
                 return json_decode($response->getBody()->getContents());
-            }
-            else
-            {
+            } else {
                 return false;
             }
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             Log::info($e->getMessage());
             return false;
         }
     }
-
-
-
 }

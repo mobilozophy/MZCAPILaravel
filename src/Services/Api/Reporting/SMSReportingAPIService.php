@@ -12,19 +12,9 @@ class SMSReportingAPIService extends MZCAPIAPIService
 {
     const ENDPOINT = 'message-center/reports';
 
-
-    public function getSubscriptions(Credentials $credentials){
-        $requestUrl = $this->getEndpointRequestUrl().'/subscription';
-
-        return $this->httpClient->get($requestUrl, [
-            'headers' => $credentials->getHeaders(),
-            'auth' => $credentials->toArray()
-        ]);
-    }
-
-
-    public function getSubscriptionConfirmation(Credentials $credentials, $lookupVal, $lookupValType){
-        $requestUrl = $this->getEndpointRequestUrl().'/subscription-confirmation/'.$lookupVal.'/'.$lookupValType;
+    public function getSubscriptions(Credentials $credentials)
+    {
+        $requestUrl = $this->getEndpointRequestUrl() . '/subscription';
 
         return $this->httpClient->get($requestUrl, [
             'headers' => $credentials->getHeaders(),
@@ -32,4 +22,21 @@ class SMSReportingAPIService extends MZCAPIAPIService
         ]);
     }
 
+    public function getSubscriptionConfirmation(
+        Credentials $credentials,
+        $lookupVal,
+        $lookupValType
+    ) {
+        $requestUrl =
+            $this->getEndpointRequestUrl() .
+            '/subscription-confirmation/' .
+            $lookupVal .
+            '/' .
+            $lookupValType;
+
+        return $this->httpClient->get($requestUrl, [
+            'headers' => $credentials->getHeaders(),
+            'auth' => $credentials->toArray()
+        ]);
+    }
 }

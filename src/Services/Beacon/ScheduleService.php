@@ -11,8 +11,8 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class ScheduleService extends ServiceBase
 {
-    public function __construct(ScheduleAPIService $apiService) {
+    public function __construct(ScheduleAPIService $apiService)
+    {
         $this->apiService = $apiService;
     }
-
 }

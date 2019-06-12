@@ -2,14 +2,12 @@
 
 namespace Mobilozophy\MZCAPILaravel\Services\Api\MessageCenter;
 
-
 use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
 use Mobilozophy\MZCAPILaravel\Services\Api\MZCAPIAPIService;
 
 class SMSPushAPIService extends MZCAPIAPIService
 {
     const ENDPOINT = 'message-center/sms/push';
-
 
     /**
      * Activate SMS Program
@@ -21,7 +19,7 @@ class SMSPushAPIService extends MZCAPIAPIService
      */
     public function activate(Credentials $credentials, $id, array $data)
     {
-        $requestUrl = $this->getEndpointRequestUrl($id).'/activate';
+        $requestUrl = $this->getEndpointRequestUrl($id) . '/activate';
 
         return $this->httpClient->put($requestUrl, [
             'headers' => $credentials->getHeaders(),
@@ -29,5 +27,4 @@ class SMSPushAPIService extends MZCAPIAPIService
             'query' => $data
         ]);
     }
-
 }

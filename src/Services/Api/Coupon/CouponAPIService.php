@@ -19,14 +19,14 @@ class CouponAPIService extends MZCAPIAPIService
      */
     public function get(Credentials $credentials, $accountId, $storeId = null)
     {
-        $storeURLAppend = ($storeId)?'?storeId='.$storeId:'';
-        $requestUrl = $this->getEndpointRequestUrl($accountId).$storeURLAppend;
+        $storeURLAppend = $storeId ? '?storeId=' . $storeId : '';
+        $requestUrl =
+            $this->getEndpointRequestUrl($accountId) . $storeURLAppend;
 
         return $this->httpClient->get($requestUrl, [
             'headers' => $credentials->getHeaders(),
-            'auth'    => $credentials->toArray()
+            'auth' => $credentials->toArray()
         ]);
-
     }
 
     /**
@@ -35,14 +35,15 @@ class CouponAPIService extends MZCAPIAPIService
      * @param Credentials $credentials
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getAllForAvailability(Credentials $credentials, $availability)
-    {
-        $requestUrl = $this->getEndpointRequestUrl().'?availability='.$availability;
+    public function getAllForAvailability(
+        Credentials $credentials,
+        $availability
+    ) {
+        $requestUrl =
+            $this->getEndpointRequestUrl() . '?availability=' . $availability;
         return $this->httpClient->get($requestUrl, [
             'headers' => $credentials->getHeaders(),
-            'auth'    => $credentials->toArray()
+            'auth' => $credentials->toArray()
         ]);
-
     }
-
 }

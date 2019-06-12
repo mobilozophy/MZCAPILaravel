@@ -12,27 +12,23 @@ class TransactionAPIService extends MZCAPIAPIService
 
     public function loyalty(Credentials $credentials, $id, array $params)
     {
-        $requestUrl = $this->getEndpointRequestUrl(['loyalty',$id]);
+        $requestUrl = $this->getEndpointRequestUrl(['loyalty', $id]);
 
         return $this->httpClient->post($requestUrl, [
-            'headers'     => $credentials->getHeaders(),
-            'auth'        => $credentials->toArray(),
+            'headers' => $credentials->getHeaders(),
+            'auth' => $credentials->toArray(),
             'form_params' => $params
         ]);
-
     }
 
     public function coupon(Credentials $credentials, $id, array $params)
     {
-        $requestUrl = $this->getEndpointRequestUrl(['coupon',$id]);
+        $requestUrl = $this->getEndpointRequestUrl(['coupon', $id]);
 
         return $this->httpClient->post($requestUrl, [
-            'headers'     => $credentials->getHeaders(),
-            'auth'        => $credentials->toArray(),
+            'headers' => $credentials->getHeaders(),
+            'auth' => $credentials->toArray(),
             'form_params' => $params
         ]);
-
     }
-
-
 }

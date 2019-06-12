@@ -18,15 +18,17 @@ abstract class AbstractAPIService
     {
         $this->httpClient = $httpClient;
     }
-    
+
     /**
      * Get endopoint API request URL with additional segments.
-     * 
+     *
      * @param mixed $segments
      */
     protected function getEndpointRequestUrl($segments = null)
     {
-        return $this->getBaseRequestUrl(array_merge([static::ENDPOINT], (array) $segments));
+        return $this->getBaseRequestUrl(
+            array_merge([static::ENDPOINT], (array) $segments)
+        );
     }
 
     /**
@@ -39,13 +41,15 @@ abstract class AbstractAPIService
         if (is_array($segments)) {
             $segments = implode('/', $segments);
         }
-        
-        return $segments ? (env('MZCAPI_BASEURL') . $segments) : env('MZCAPI_BASEURL');
+
+        return $segments
+            ? env('MZCAPI_BASEURL') . $segments
+            : env('MZCAPI_BASEURL');
     }
-    
+
     /**
      * Get filtered input data.
-     * 
+     *
      * @param array $data
      * @param array $keys
      * @return array Fitered data
@@ -53,32 +57,32 @@ abstract class AbstractAPIService
     protected function pruneInputData(array $data, array $keys)
     {
         $data = array_only($data, $keys);
-        $data = array_where($data, function($key, $value) {
+        $data = array_where($data, function ($key, $value) {
             return is_scalar($value) || is_array($value);
         });
-        
+
         return $data;
     }
-    
+
     /**
      * Validate input data.
-     * 
+     *
      * @param array $data
      * @param array $required Required field names
      */
     protected function validateInputData(array $data, array $required)
     {
-        if ( ! $this->arrayHasFields($data, $required)) {
+        if (!$this->arrayHasFields($data, $required)) {
             $missing = $this->getMissingFields($data, $required);
             throw new InvalidArgumentException(
                 'Missing required fields "' . implode(', ', $missing) . '".'
             );
         }
     }
-    
+
     /**
      * Check if all fields are present in an array.
-     * 
+     *
      * @param array $array
      * @param array $fields
      * @return boolean
@@ -87,7 +91,7 @@ abstract class AbstractAPIService
     {
         return count($this->getMissingFields($array, $fields)) ? false : true;
     }
-    
+
     /**
      * Get an array of fields missing from an array.
      * @param array $array

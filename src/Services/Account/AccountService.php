@@ -11,14 +11,13 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class AccountService extends ServiceBase
 {
-
     /**
      * AccountService constructor.
      *
      * @param AccountAPIService $accountAPIService
      */
-    public function __construct(AccountAPIService $accountAPIService) {
+    public function __construct(AccountAPIService $accountAPIService)
+    {
         $this->apiService = $accountAPIService;
     }
-
 }

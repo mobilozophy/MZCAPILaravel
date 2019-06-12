@@ -10,7 +10,6 @@ use InvalidArgumentException;
 
 class MZCAPIAPIService extends AbstractAPIService
 {
-
     /**
      * Send a request to add a new resource.
      *
@@ -23,15 +22,12 @@ class MZCAPIAPIService extends AbstractAPIService
     {
         $requestUrl = $this->getEndpointRequestUrl();
 
-            return $this->httpClient->post(
-                $requestUrl,
-                $this->generateOptions($credentials,
-                    [
-                        'form_params' => $params,
-                    ]
-                )
-            );
-
+        return $this->httpClient->post(
+            $requestUrl,
+            $this->generateOptions($credentials, [
+                'form_params' => $params
+            ])
+        );
     }
 
     /**
@@ -49,13 +45,10 @@ class MZCAPIAPIService extends AbstractAPIService
 
         return $this->httpClient->put(
             $requestUrl,
-            $this->generateOptions($credentials,
-                [
-                    'form_params' => $params,
-                ]
-            )
+            $this->generateOptions($credentials, [
+                'form_params' => $params
+            ])
         );
-
     }
 
     /**
@@ -66,19 +59,20 @@ class MZCAPIAPIService extends AbstractAPIService
      * @param string $include
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function get(Credentials $credentials, $id, $include=[])
+    public function get(Credentials $credentials, $id, $include = [])
     {
-        $includesImplode  = implode(',',$include);
+        $includesImplode = implode(',', $include);
 
-        $includeAddOn = ((!is_null($includesImplode) && $includesImplode!='')?"?include=$includesImplode":'');
-        $requestUrl = $this->getEndpointRequestUrl($id).$includeAddOn;
+        $includeAddOn =
+            !is_null($includesImplode) && $includesImplode != ''
+                ? "?include=$includesImplode"
+                : '';
+        $requestUrl = $this->getEndpointRequestUrl($id) . $includeAddOn;
         return $this->httpClient->get(
             $requestUrl,
             $this->generateOptions($credentials)
         );
-
     }
-
 
     /**
      * Send a request to retrieve all resources.
@@ -94,9 +88,7 @@ class MZCAPIAPIService extends AbstractAPIService
             $requestUrl,
             $this->generateOptions($credentials)
         );
-
     }
-
 
     /**
      * Send a request to delete a resource
@@ -114,7 +106,6 @@ class MZCAPIAPIService extends AbstractAPIService
         );
     }
 
-
     /**
      * Get base API request URL with additional segments.
      *
@@ -128,17 +119,18 @@ class MZCAPIAPIService extends AbstractAPIService
             $segments = implode('/', $segments);
         }
 
-        $baseUrl =config('app.MZCAPI_BASEURL');
+        $baseUrl = config('app.MZCAPI_BASEURL');
 
         return $baseUrl . '/' . $segments;
     }
 
-    protected function generateOptions(Credentials $credentials, $options = null)
-    {
-
+    protected function generateOptions(
+        Credentials $credentials,
+        $options = null
+    ) {
         $base = [
             'headers' => $credentials->getHeaders(),
-            'auth' => $credentials->toArray(),
+            'auth' => $credentials->toArray()
         ];
 
         if (isset($options)) {
@@ -147,19 +139,17 @@ class MZCAPIAPIService extends AbstractAPIService
 
         //Check if we need to proxy the request; really only to be used in a development environement
         if (env('PROXY_REQUESTS_IP_PORT', false)) {
-            if ( is_bool(env('PROXY_REQUESTS_IP_PORT', false)) ){
-                $address = gethostbyname(trim(exec("hostname"))).':8888';
-            }else
-            {
+            if (is_bool(env('PROXY_REQUESTS_IP_PORT', false))) {
+                $address = gethostbyname(trim(exec("hostname"))) . ':8888';
+            } else {
                 $address = env('PROXY_REQUESTS_IP_PORT');
             }
             $proxy = [
-                'proxy' => 'http://' . $address,
+                'proxy' => 'http://' . $address
             ];
             $base = array_merge($base, $proxy);
         }
 
         return $base;
-
     }
 }

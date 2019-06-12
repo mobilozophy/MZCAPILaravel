@@ -2,7 +2,6 @@
 
 namespace Mobilozophy\MZCAPILaravel\Services\Reporting;
 
-
 use Mobilozophy\MZCAPILaravel\Services\Api\Reporting\ReportingAPIService;
 use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
 
@@ -19,9 +18,8 @@ class ReportingService extends ServiceBase
      * ReportingService constructor.
      * @param ReportingAPIService $reportingAPIService
      */
-    public function __construct(
-        ReportingAPIService $reportingAPIService
-    ) {
+    public function __construct(ReportingAPIService $reportingAPIService)
+    {
         $this->reportingAPIService = $reportingAPIService;
     }
 
@@ -33,26 +31,42 @@ class ReportingService extends ServiceBase
      * @param array $otherHeaders Other headers to apply to call.
      * @return bool|mixed
      */
-    public function getTransactionReport($type, $timespan, $account_uuid, $scope, $otherHeaders, $user = null ,$pass = null)
-    {
-        if( (!is_null($user)) && (!is_null($pass)))
-        {
+    public function getTransactionReport(
+        $type,
+        $timespan,
+        $account_uuid,
+        $scope,
+        $otherHeaders,
+        $user = null,
+        $pass = null
+    ) {
+        if (!is_null($user) && !is_null($pass)) {
             $response = $this->reportingAPIService->getTransactionReport(
-                $this->customSubAccountCredentials($user, $pass, $account_uuid,$scope, $otherHeaders),$type,$timespan
+                $this->customSubAccountCredentials(
+                    $user,
+                    $pass,
+                    $account_uuid,
+                    $scope,
+                    $otherHeaders
+                ),
+                $type,
+                $timespan
+            );
+        } else {
+            $response = $this->reportingAPIService->getTransactionReport(
+                $this->getSubAccountCredentials(
+                    $account_uuid,
+                    $scope,
+                    $otherHeaders
+                ),
+                $type,
+                $timespan
             );
         }
-        else
-        {
-            $response = $this->reportingAPIService->getTransactionReport(
-                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders),$type,$timespan
-            );
-        }
-
 
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
-        } else
-        {
+        } else {
             return false;
         }
     }
@@ -65,101 +79,122 @@ class ReportingService extends ServiceBase
      * @param array $otherHeaders Other headers to apply to call.
      * @return bool|mixed
      */
-    public function getRegistrationReport($type, $timespan, $account_uuid, $scope, $otherHeaders, $user = null ,$pass = null)
-    {
-        if( (!is_null($user)) && (!is_null($pass)))
-        {
+    public function getRegistrationReport(
+        $type,
+        $timespan,
+        $account_uuid,
+        $scope,
+        $otherHeaders,
+        $user = null,
+        $pass = null
+    ) {
+        if (!is_null($user) && !is_null($pass)) {
             $response = $this->reportingAPIService->getRegistrationsReport(
-                $this->customSubAccountCredentials($user, $pass, $account_uuid,$scope, $otherHeaders),$type,$timespan
+                $this->customSubAccountCredentials(
+                    $user,
+                    $pass,
+                    $account_uuid,
+                    $scope,
+                    $otherHeaders
+                ),
+                $type,
+                $timespan
             );
-        }
-        else
-        {
+        } else {
             $response = $this->reportingAPIService->getRegistrationsReport(
-                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders),$type,$timespan
+                $this->getSubAccountCredentials(
+                    $account_uuid,
+                    $scope,
+                    $otherHeaders
+                ),
+                $type,
+                $timespan
             );
         }
 
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
-        } else
-        {
+        } else {
             return false;
         }
     }
-
 
     /**
      * @return bool|mixed
      */
-    public function getMerchantReport($account_uuid, $scope = false, $otherHeaders=[])
-    {
-        try
-        {
+    public function getMerchantReport(
+        $account_uuid,
+        $scope = false,
+        $otherHeaders = []
+    ) {
+        try {
             $response = $this->reportingAPIService->getMerchantReport(
-                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders)
+                $this->getSubAccountCredentials(
+                    $account_uuid,
+                    $scope,
+                    $otherHeaders
+                )
             );
 
-            if ($response->getStatusCode() == 200)
-            {
+            if ($response->getStatusCode() == 200) {
                 return json_decode($response->getBody()->getContents(), true);
-            }
-            else
-            {
+            } else {
                 return false;
             }
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return false;
         }
     }
 
-    public function getConsumerActivityRegistrations($account_uuid, $scope = false, $otherHeaders=[])
-    {
-        try
-        {
+    public function getConsumerActivityRegistrations(
+        $account_uuid,
+        $scope = false,
+        $otherHeaders = []
+    ) {
+        try {
             $response = $this->reportingAPIService->getConsumerActivityReport(
-                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders)
+                $this->getSubAccountCredentials(
+                    $account_uuid,
+                    $scope,
+                    $otherHeaders
+                )
             );
 
-            if ($response->getStatusCode() == 200)
-            {
+            if ($response->getStatusCode() == 200) {
                 return json_decode($response->getBody()->getContents(), true);
-            }
-            else
-            {
+            } else {
                 return false;
             }
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return false;
         }
     }
 
-    public function getMemberReportActivity($account_uuid, $reg, $type, $scope = false, $otherHeaders=[])
-    {
-        try
-        {
+    public function getMemberReportActivity(
+        $account_uuid,
+        $reg,
+        $type,
+        $scope = false,
+        $otherHeaders = []
+    ) {
+        try {
             $response = $this->reportingAPIService->getMemberReportActivity(
-                $this->getSubAccountCredentials($account_uuid,$scope, $otherHeaders),
-                $reg, $type);
+                $this->getSubAccountCredentials(
+                    $account_uuid,
+                    $scope,
+                    $otherHeaders
+                ),
+                $reg,
+                $type
+            );
 
-            if ($response->getStatusCode() == 200)
-            {
+            if ($response->getStatusCode() == 200) {
                 return json_decode($response->getBody()->getContents(), true);
-            }
-            else
-            {
+            } else {
                 return false;
             }
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return false;
         }
     }
-
-
 }

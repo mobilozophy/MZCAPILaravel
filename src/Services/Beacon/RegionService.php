@@ -11,14 +11,13 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class RegionService extends ServiceBase
 {
-
     /**
      * RegionService constructor.
      *
      * @param RegionAPIService $regionAPIService
      */
-    public function __construct(RegionAPIService $regionAPIService) {
+    public function __construct(RegionAPIService $regionAPIService)
+    {
         $this->apiService = $regionAPIService;
     }
-
 }

@@ -2,7 +2,6 @@
 
 namespace Mobilozophy\MZCAPILaravel\Services\Reporting;
 
-
 use Mobilozophy\MZCAPILaravel\Services\Api\Reporting\SMSReportingAPIService;
 use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
 
@@ -13,14 +12,12 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class SMSReportingService extends ServiceBase
 {
-
     /**
      * SMSReportingService constructor.
      * @param SMSReportingAPIService $smsReportingAPIService
      */
-    public function __construct(
-        SMSReportingAPIService $smsReportingAPIService
-    ) {
+    public function __construct(SMSReportingAPIService $smsReportingAPIService)
+    {
         $this->smsReportingAPIService = $smsReportingAPIService;
     }
 
@@ -34,8 +31,7 @@ class SMSReportingService extends ServiceBase
         );
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
-        } else
-        {
+        } else {
             return false;
         }
     }
@@ -54,12 +50,8 @@ class SMSReportingService extends ServiceBase
         );
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
-        } else
-        {
+        } else {
             return false;
         }
     }
-
-
-
 }

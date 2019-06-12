@@ -25,10 +25,10 @@ trait UsesCredentialsTrait
      */
     protected function getCredentials()
     {
-        if ( ! $this->credentials) {
-            throw new MissingCredentialsException;
+        if (!$this->credentials) {
+            throw new MissingCredentialsException();
         }
-        
+
         return $this->credentials;
     }
 }

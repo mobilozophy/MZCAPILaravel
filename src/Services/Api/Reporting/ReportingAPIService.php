@@ -9,7 +9,6 @@ class ReportingAPIService extends MZCAPIAPIService
 {
     const ENDPOINT = 'reports';
 
-
     /**
      * Send a request to retrieve a store.
      *
@@ -17,21 +16,32 @@ class ReportingAPIService extends MZCAPIAPIService
      * @param integer $accountId
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getTransactionReport(Credentials $credentials, $type, $timespan)
-    {
-
-        $requestUrl = $this->getEndpointRequestUrl(['transactions',$type,$timespan]);
+    public function getTransactionReport(
+        Credentials $credentials,
+        $type,
+        $timespan
+    ) {
+        $requestUrl = $this->getEndpointRequestUrl([
+            'transactions',
+            $type,
+            $timespan
+        ]);
         return $this->httpClient->get($requestUrl, [
             'headers' => $credentials->getHeaders(),
             'auth' => $credentials->toArray()
         ]);
     }
 
-
-    public function getRegistrationsReport(Credentials $credentials, $type, $timespan)
-    {
-
-        $requestUrl = $this->getEndpointRequestUrl(['registrations',$type,$timespan]);
+    public function getRegistrationsReport(
+        Credentials $credentials,
+        $type,
+        $timespan
+    ) {
+        $requestUrl = $this->getEndpointRequestUrl([
+            'registrations',
+            $type,
+            $timespan
+        ]);
         return $this->httpClient->get($requestUrl, [
             'headers' => $credentials->getHeaders(),
             'auth' => $credentials->toArray()
@@ -46,7 +56,6 @@ class ReportingAPIService extends MZCAPIAPIService
             'headers' => $credentials->getHeaders(),
             'auth' => $credentials->toArray()
         ]);
-
     }
 
     public function getConsumerActivityReport(Credentials $credentials)
@@ -57,12 +66,16 @@ class ReportingAPIService extends MZCAPIAPIService
             'headers' => $credentials->getHeaders(),
             'auth' => $credentials->toArray()
         ]);
-
     }
 
-    public function getMemberReportActivity(Credentials $credentials, $reg, $type)
-    {
-        $requestUrl = $this->getEndpointRequestUrl("consumer/activity/$reg/$type");
+    public function getMemberReportActivity(
+        Credentials $credentials,
+        $reg,
+        $type
+    ) {
+        $requestUrl = $this->getEndpointRequestUrl(
+            "consumer/activity/$reg/$type"
+        );
 
         return $this->httpClient->get($requestUrl, [
             'headers' => $credentials->getHeaders(),

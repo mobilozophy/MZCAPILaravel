@@ -12,12 +12,12 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class FileService extends ServiceBase
 {
-
     /**
      * FileService constructor.
      * @param FileAPIService $fileAPIService
      */
-    public function __construct( FileAPIService $fileAPIService) {
+    public function __construct(FileAPIService $fileAPIService)
+    {
         $this->apiService = $fileAPIService;
     }
 
@@ -29,15 +29,22 @@ class FileService extends ServiceBase
      * @param bool|string $scope The scope to apply to call (ex. with-children will scope to all child accounts).*
      * @return bool|mixed
      */
-    public function upload($file, $scopeable, $scopable_id, $account_uuid = null, $scope = false)
-    {
+    public function upload(
+        $file,
+        $scopeable,
+        $scopable_id,
+        $account_uuid = null,
+        $scope = false
+    ) {
         $response = $this->apiService->uploadFile(
-            $this->getSubAccountCredentials($account_uuid,$scope), $scopeable,$scopable_id,$file
+            $this->getSubAccountCredentials($account_uuid, $scope),
+            $scopeable,
+            $scopable_id,
+            $file
         );
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
-        } else
-        {
+        } else {
             return false;
         }
     }

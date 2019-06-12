@@ -19,7 +19,7 @@ class TriggeredSendAPIService extends MZCAPIAPIService
      */
     public function send(Credentials $credentials, $id, $payload)
     {
-        $requestUrl = $this->getEndpointRequestUrl().'/'.$id;
+        $requestUrl = $this->getEndpointRequestUrl() . '/' . $id;
 
         return $this->httpClient->post($requestUrl, [
             'headers' => $credentials->getHeaders(),
@@ -27,5 +27,4 @@ class TriggeredSendAPIService extends MZCAPIAPIService
             'json' => $payload
         ]);
     }
-
 }

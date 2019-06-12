@@ -23,20 +23,22 @@ class Credentials
     {
         $this->username = $username;
         $this->password = $password;
-        $this->headers  = $headers;
+        $this->headers = $headers;
     }
 
     /**
      * @return array
      */
-    public function toArray() {
+    public function toArray()
+    {
         return [$this->username, $this->password];
     }
 
     /**
      * @return array
      */
-    public function getHeaders() {
+    public function getHeaders()
+    {
         return $this->headers;
     }
 }

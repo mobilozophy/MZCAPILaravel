@@ -12,15 +12,12 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class ListService extends ServiceBase
 {
-
     /**
      * ListService constructor.
      * @param ListAPIService $listApiService
      */
-    public function __construct(
-        ListAPIService $listApiService
-    ) {
+    public function __construct(ListAPIService $listApiService)
+    {
         $this->apiService = $listApiService;
     }
-
 }

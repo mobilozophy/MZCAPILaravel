@@ -19,8 +19,8 @@ class SparkService extends ServiceBase
      * ReportingService constructor.
      * @param SparkAPIService $sparkAPIService
      */
-    public function __construct() {
-
+    public function __construct()
+    {
     }
 
     public function usesTeams()

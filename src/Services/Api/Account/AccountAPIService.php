@@ -8,5 +8,4 @@ use Mobilozophy\MZCAPILaravel\Services\Api\MZCAPIAPIService;
 class AccountAPIService extends MZCAPIAPIService
 {
     const ENDPOINT = 'accounts';
-
 }

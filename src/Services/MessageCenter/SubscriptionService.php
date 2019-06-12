@@ -12,16 +12,12 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class SubscriptionService extends ServiceBase
 {
-
     /**
      * SubscriptionService constructor.
      * @param SubscriptionAPIService $subscriptionAPIService
      */
-    public function __construct(
-        SubscriptionAPIService $subscriptionAPIService
-    ) {
+    public function __construct(SubscriptionAPIService $subscriptionAPIService)
+    {
         $this->apiService = $subscriptionAPIService;
     }
-
-
 }

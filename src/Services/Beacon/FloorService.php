@@ -11,9 +11,8 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class FloorService extends ServiceBase
 {
-
-    public function __construct(FloorAPIService $apiService) {
+    public function __construct(FloorAPIService $apiService)
+    {
         $this->apiService = $apiService;
     }
-
 }

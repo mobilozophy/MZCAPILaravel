@@ -12,7 +12,6 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class ValidationTokenService extends ServiceBase
 {
-
     /**
      * ValidationTokenService constructor.
      * @param ValidationTokenAPIService $validationTokenAPIService
@@ -23,7 +22,6 @@ class ValidationTokenService extends ServiceBase
         $this->apiService = $validationTokenAPIService;
     }
 
-
     /**
      * @param string $resource The name of the resource to scope token to.
      * @param int $resource_id The Id of the resocurce to scope token to.
@@ -31,25 +29,31 @@ class ValidationTokenService extends ServiceBase
      * @param bool|string $scope The scope to apply to call (ex. with-children will scope to all child accounts).
      * @return bool|mixed
      */
-    public function getToken($resource, $resource_id, $type='QR Code', $code = NULL, $account_uuid = null, $scope = false)
-    {
+    public function getToken(
+        $resource,
+        $resource_id,
+        $type = 'QR Code',
+        $code = null,
+        $account_uuid = null,
+        $scope = false
+    ) {
         try {
             //Gather resource and resource id; compose url
-            $resources = $resource.'/'.$resource_id.'?type='.$type;
-            if( !is_null($code) ) {
-                $resources .='&code='.$code;
+            $resources = $resource . '/' . $resource_id . '?type=' . $type;
+            if (!is_null($code)) {
+                $resources .= '&code=' . $code;
             }
 
             $response = $this->apiService->get(
-                $this->getSubAccountCredentials($account_uuid,$scope), $resources
+                $this->getSubAccountCredentials($account_uuid, $scope),
+                $resources
             );
             if ($response->getStatusCode() == 200) {
                 return json_decode($response->getBody()->getContents());
             } else {
                 return false;
             }
-        } catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return false;
         }
     }
@@ -64,19 +68,16 @@ class ValidationTokenService extends ServiceBase
     {
         try {
             $response = $this->apiService->getByToken(
-                $this->getSubAccountCredentials($account_uuid,$scope), $token
+                $this->getSubAccountCredentials($account_uuid, $scope),
+                $token
             );
             if ($response->getStatusCode() == 200) {
                 return json_decode($response->getBody()->getContents());
             } else {
                 return false;
             }
-        } catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return false;
         }
     }
-
-
-
 }

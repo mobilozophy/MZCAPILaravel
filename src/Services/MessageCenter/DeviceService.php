@@ -12,17 +12,12 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class DeviceService extends ServiceBase
 {
-
     /**
      * DeviceService constructor.
      * @param DeviceAPIService $deviceApiService
      */
-    public function __construct(
-        DeviceAPIService $deviceApiService
-    ) {
+    public function __construct(DeviceAPIService $deviceApiService)
+    {
         $this->apiService = $deviceApiService;
     }
-
-
-
 }

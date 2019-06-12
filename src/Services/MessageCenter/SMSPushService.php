@@ -12,15 +12,12 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class SMSPushService extends ServiceBase
 {
-
     /**
      * SMSPushService constructor.
      * @param SMSPushAPIService $SMSPushAPIService
      */
-    public function __construct(
-        SMSPushAPIService $SMSPushAPIService
-    ) {
+    public function __construct(SMSPushAPIService $SMSPushAPIService)
+    {
         $this->apiService = $SMSPushAPIService;
     }
-
 }

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Mobilozophy\MZCAPILaravel\Services\Api\MessageCenter;
 
 use Mobilozophy\MZCAPILaravel\Services\Api\Credentials;
@@ -17,9 +16,11 @@ class FirebaseCloudAPIService extends MZCAPIAPIService
      * @param integer $accountId
      * @return mixed
      */
-    public function makePostCall(Credentials $credentials, array $data = [], $segment = '')
-    {
-
+    public function makePostCall(
+        Credentials $credentials,
+        array $data = [],
+        $segment = ''
+    ) {
         $requestUrl = $this->getEndpointRequestUrl($segment);
 
         return $this->httpClient->post($requestUrl, [
@@ -38,7 +39,6 @@ class FirebaseCloudAPIService extends MZCAPIAPIService
      */
     public function makeGetCall(Credentials $credentials, $segment = '')
     {
-
         $requestUrl = $this->getEndpointRequestUrl($segment);
 
         return $this->httpClient->get($requestUrl, [
@@ -54,9 +54,11 @@ class FirebaseCloudAPIService extends MZCAPIAPIService
      * @param integer $accountId
      * @return mixed
      */
-    public function makeDeleteCall(Credentials $credentials, $note_id, $segment = '')
-    {
-
+    public function makeDeleteCall(
+        Credentials $credentials,
+        $note_id,
+        $segment = ''
+    ) {
         $requestUrl = $this->getEndpointRequestUrl($segment);
 
         return $this->httpClient->delete($requestUrl, [
@@ -65,6 +67,4 @@ class FirebaseCloudAPIService extends MZCAPIAPIService
             'form_params' => ['notification_id' => $note_id]
         ]);
     }
-
-
 }

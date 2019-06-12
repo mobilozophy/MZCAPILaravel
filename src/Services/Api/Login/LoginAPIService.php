@@ -25,11 +25,10 @@ class LoginAPIService extends MZCAPIAPIService
 
         $response = $this->httpClient->get($requestUrl, [
             'headers' => $credentials->getHeaders(),
-            'auth'    => $credentials->toArray()
+            'auth' => $credentials->toArray()
         ]);
 
         return $response;
-
     }
 
     public function confirmLogin(Credentials $credentials)
@@ -40,10 +39,9 @@ class LoginAPIService extends MZCAPIAPIService
 
         $response = $this->httpClient->post($requestUrl, [
             'headers' => $credentials->getHeaders(),
-            'auth'    => $credentials->toArray()
+            'auth' => $credentials->toArray()
         ]);
 
         return $response;
     }
-
 }

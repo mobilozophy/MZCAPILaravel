@@ -12,13 +12,13 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class InterestCategoryService extends ServiceBase
 {
-
     /**
      * InterestCategoryService constructor.
      * @param InterestCategoryAPIService $interestCategoryAPIService
      */
-    public function __construct( InterestCategoryAPIService $interestCategoryAPIService) {
+    public function __construct(
+        InterestCategoryAPIService $interestCategoryAPIService
+    ) {
         $this->apiService = $interestCategoryAPIService;
     }
-
 }

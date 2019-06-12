@@ -11,9 +11,8 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class ObjectKeywordService extends ServiceBase
 {
-
-    public function __construct(ObjectKeywordAPIService $apiService) {
+    public function __construct(ObjectKeywordAPIService $apiService)
+    {
         $this->apiService = $apiService;
     }
-
 }

@@ -11,9 +11,8 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class ActionService extends ServiceBase
 {
-
-    public function __construct(ActionAPIService $apiService) {
+    public function __construct(ActionAPIService $apiService)
+    {
         $this->apiService = $apiService;
     }
-
 }

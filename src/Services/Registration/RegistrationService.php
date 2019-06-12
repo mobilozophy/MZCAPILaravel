@@ -12,12 +12,12 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class RegistrationService extends ServiceBase
 {
-
     /**
      * RegistrationService constructor.
      * @param RegistrationAPIService $registrationAPIService
      */
-    public function __construct(RegistrationAPIService $registrationAPIService) {
+    public function __construct(RegistrationAPIService $registrationAPIService)
+    {
         $this->apiService = $registrationAPIService;
     }
 
@@ -28,14 +28,13 @@ class RegistrationService extends ServiceBase
      */
     public function login(array $data, $account_uuid = null)
     {
-
         $response = $this->apiService->login(
-            $this->getSubAccountCredentials($account_uuid), $data
+            $this->getSubAccountCredentials($account_uuid),
+            $data
         );
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
-        } else
-        {
+        } else {
             return false;
         }
     }
@@ -45,16 +44,17 @@ class RegistrationService extends ServiceBase
      * @param null $account_uuid
      * @return bool|mixed
      */
-    public function loginWithMerchantIdentifier(array $data, $account_uuid = null)
-    {
-
+    public function loginWithMerchantIdentifier(
+        array $data,
+        $account_uuid = null
+    ) {
         $response = $this->apiService->loginWithMerchantIdentifier(
-            $this->getSubAccountCredentials($account_uuid), $data
+            $this->getSubAccountCredentials($account_uuid),
+            $data
         );
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
-        } else
-        {
+        } else {
             return false;
         }
     }
@@ -64,18 +64,18 @@ class RegistrationService extends ServiceBase
      * @param null|string $account_uuid The account id of the account to perform this call on.
      * @return bool|mixed
      */
-    public function locateRegisteredUserByEmail(array $data, $account_uuid = null)
-    {
-
+    public function locateRegisteredUserByEmail(
+        array $data,
+        $account_uuid = null
+    ) {
         $response = $this->apiService->locateRegisteredUserByEmail(
-            $this->getSubAccountCredentials($account_uuid), $data
+            $this->getSubAccountCredentials($account_uuid),
+            $data
         );
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
-        } else
-        {
+        } else {
             return false;
         }
     }
-
 }

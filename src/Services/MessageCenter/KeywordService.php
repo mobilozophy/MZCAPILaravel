@@ -12,16 +12,12 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class KeywordService extends ServiceBase
 {
-
     /**
      * KeywordService constructor.
      * @param KeywordAPIService $keywordApiService
      */
-    public function __construct(
-        KeywordAPIService $keywordApiService
-    ) {
+    public function __construct(KeywordAPIService $keywordApiService)
+    {
         $this->apiService = $keywordApiService;
     }
-
-
 }

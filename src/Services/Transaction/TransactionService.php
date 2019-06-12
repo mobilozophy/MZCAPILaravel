@@ -12,12 +12,12 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class TransactionService extends ServiceBase
 {
-
     /**
      * TransactionService constructor.
      * @param TransactionAPIService $transactionAPIService
      */
-    public function __construct(TransactionAPIService $transactionAPIService) {
+    public function __construct(TransactionAPIService $transactionAPIService)
+    {
         $this->apiService = $transactionAPIService;
     }
 
@@ -29,20 +29,28 @@ class TransactionService extends ServiceBase
      * @param array $otherHeaders Other headers to apply to call.
      * @return bool|mixed
      */
-    public function loyalty($id, array $data, $account_uuid = null, $scope = false, $otherHeaders)
-    {
-
+    public function loyalty(
+        $id,
+        array $data,
+        $account_uuid = null,
+        $scope = false,
+        $otherHeaders
+    ) {
         $response = $this->apiService->loyalty(
-            $this->getSubAccountCredentials($account_uuid,$scope,$otherHeaders), $id, $data
+            $this->getSubAccountCredentials(
+                $account_uuid,
+                $scope,
+                $otherHeaders
+            ),
+            $id,
+            $data
         );
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
-        } else
-        {
+        } else {
             return false;
         }
     }
-
 
     /**
      * @param string $id Id (UUID) of the record to be updated.
@@ -52,19 +60,26 @@ class TransactionService extends ServiceBase
      * @param array $otherHeaders Other headers to apply to call.
      * @return bool|mixed
      */
-    public function coupon($id, array $data, $account_uuid = null, $scope = false, $otherHeaders)
-    {
-
+    public function coupon(
+        $id,
+        array $data,
+        $account_uuid = null,
+        $scope = false,
+        $otherHeaders
+    ) {
         $response = $this->apiService->coupon(
-            $this->getSubAccountCredentials($account_uuid,$scope,$otherHeaders), $id, $data
+            $this->getSubAccountCredentials(
+                $account_uuid,
+                $scope,
+                $otherHeaders
+            ),
+            $id,
+            $data
         );
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
-        } else
-        {
+        } else {
             return false;
         }
     }
-
-
 }

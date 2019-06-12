@@ -12,12 +12,12 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class RedemptionService extends ServiceBase
 {
-
     /**
      * RedemptionService constructor.
      * @param RedemptionAPIService $redemptionAPIService
      */
-    public function __construct(RedemptionAPIService $redemptionAPIService) {
+    public function __construct(RedemptionAPIService $redemptionAPIService)
+    {
         $this->apiService = $redemptionAPIService;
     }
 
@@ -30,21 +30,28 @@ class RedemptionService extends ServiceBase
      * @param array $otherHeaders Other headers to apply to call.
      * @return bool|mixed
      */
-    public function generateCode($resourceScope, $resourceScope_id, $registration_id, $account_uuid = null, $scope = false, $otherHeaders)
-    {
-
+    public function generateCode(
+        $resourceScope,
+        $resourceScope_id,
+        $registration_id,
+        $account_uuid = null,
+        $scope = false,
+        $otherHeaders
+    ) {
         $response = $this->apiService->generateCode(
-            $this->getSubAccountCredentials($account_uuid,$scope,$otherHeaders),$resourceScope,$resourceScope_id,$registration_id
+            $this->getSubAccountCredentials(
+                $account_uuid,
+                $scope,
+                $otherHeaders
+            ),
+            $resourceScope,
+            $resourceScope_id,
+            $registration_id
         );
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
-        } else
-        {
+        } else {
             return false;
         }
     }
-
-
-
-
 }

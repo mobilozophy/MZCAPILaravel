@@ -12,17 +12,12 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class CampaignService extends ServiceBase
 {
-
     /**
      * CampaignService constructor.
      * @param CampaignAPIService $campaignAPIService
      */
-    public function __construct(
-        CampaignAPIService $campaignAPIService
-    ) {
+    public function __construct(CampaignAPIService $campaignAPIService)
+    {
         $this->apiService = $campaignAPIService;
     }
-
-
-
 }

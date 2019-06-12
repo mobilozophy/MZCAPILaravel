@@ -12,7 +12,6 @@ use Mobilozophy\MZCAPILaravel\Services\ServiceBase;
  */
 class TriggeredSendProfileService extends ServiceBase
 {
-
     /**
      * TriggeredSendProfileService constructor.
      * @param TriggeredSendProfileAPIService $triggeredSendProfileAPIService
@@ -22,6 +21,4 @@ class TriggeredSendProfileService extends ServiceBase
     ) {
         $this->apiService = $triggeredSendProfileAPIService;
     }
-
-
 }

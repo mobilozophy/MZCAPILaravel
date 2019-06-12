@@ -2,7 +2,6 @@
 
 namespace Mobilozophy\MZCAPILaravel\Services\Api\MessageCenter;
 
-
 use Mobilozophy\MZCAPILaravel\Services\Api\MZCAPIAPIService;
 
 class MessageTemplateAPIService extends MZCAPIAPIService
