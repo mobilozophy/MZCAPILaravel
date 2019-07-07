@@ -22,7 +22,8 @@ class FileAPIService extends MZCAPIAPIService
         Credentials $credentials,
         $scope,
         $scope_id,
-        $file
+        $file,
+        $fileType = 'primary'
     ) {
         $requestUrl =
             $this->getEndpointRequestUrl() . '/' . $scope . '/' . $scope_id;
@@ -38,6 +39,7 @@ class FileAPIService extends MZCAPIAPIService
                 [
                     'name' => 'file',
                     'filename' => $image_org,
+                    'file_type' => $fileType,
                     'Mime-Type' => $image_mime,
                     'contents' => fopen($image_path, 'r')
                 ]
