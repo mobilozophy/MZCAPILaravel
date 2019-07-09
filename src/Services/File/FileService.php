@@ -35,12 +35,14 @@ class FileService extends ServiceBase
         $scopable_id,
         $account_uuid = null,
         $scope = false
+        $fileType = 'primary'
     ) {
         $response = $this->apiService->uploadFile(
             $this->getSubAccountCredentials($account_uuid, $scope),
             $scopeable,
             $scopable_id,
-            $file
+            $file,
+            $fileType
         );
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
