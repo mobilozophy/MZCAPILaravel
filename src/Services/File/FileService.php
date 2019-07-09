@@ -34,7 +34,7 @@ class FileService extends ServiceBase
         $scopeable,
         $scopable_id,
         $account_uuid = null,
-        $scope = false
+        $scope = false,
         $fileType = 'primary'
     ) {
         $response = $this->apiService->uploadFile(
