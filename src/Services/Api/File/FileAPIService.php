@@ -43,8 +43,8 @@ class FileAPIService extends MZCAPIAPIService
                     'contents' => fopen($image_path, 'r')
                 ],
                 [
-                    'name': 'file_type',
-                    'contents': $fileType
+                    'name' => 'file_type',
+                    'contents' => $fileType
                 ]
             ]
         ]);
