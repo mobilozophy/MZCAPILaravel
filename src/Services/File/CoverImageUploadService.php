@@ -13,11 +13,8 @@ class CoverImageUploadService
         $this->fileService = $fileService;
     }
 
-    public function upload($data, $model)
+    public function upload($data, $resource_id, $scopable_type)
     {
-        $scopable_type = get_class($model);
-        $resource_id = $model->id;
-
         $this->fileService->upload($data, $scopable_type, $resource_id, false, null, 'cover');
     }
 }
