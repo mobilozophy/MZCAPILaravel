@@ -29,7 +29,7 @@ class ApplicationService extends ServiceBase
                 return json_decode($response->getBody()->getContents());
             }
 
-            return false;
+            return $response->getBody()->getContents();
 
         } catch(\Exception $e) {
             return false;
@@ -48,7 +48,7 @@ class ApplicationService extends ServiceBase
                 return json_decode($response->getBody()->getContents());
             }
 
-            return false;
+            return $response->getBody()->getContents();
 
         } catch (\Exception $e) {
             return false;
@@ -86,7 +86,7 @@ class ApplicationService extends ServiceBase
                 return json_decode($response->getBody()->getContents());
             }
 
-            return false;
+            return $response->getBody()->getContents();
 
         } catch (\Exception $e) {
             return false;
