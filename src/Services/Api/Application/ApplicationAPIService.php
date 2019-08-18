@@ -9,6 +9,12 @@ class ApplicationAPIService extends MZCAPIAPIService
 {
     const ENDPOINT = 'apps';
 
+    public function createApplication(Credentials $credentials, $applicationName)
+    {
+        $requestUrl = $this->getEndpointRequestUrl();
+        return $this->httpClient->post($requestUrl, $this->generateOptions($credentials));
+    }
+
     public function setFeaturedCoupon(Credentials $credentials, $appId, $couponId)
     {
         $requestUrl = $this->getEndpointRequestUrl([$appId, 'featured', 'coupons', $couponId]);

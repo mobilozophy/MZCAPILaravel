@@ -17,6 +17,25 @@ class ApplicationService extends ServiceBase
         $this->apiService = $applicationAPIService;
     }
 
+    public function createApplication($accountUuid, $name, $scope = false, $otherHeaders = [])
+    {
+        try {
+            $response = $this->apiService->createApplication(
+                $this->getSubAccountCredentials($accountUuid, $scope, $otherHeaders),
+                $name
+            );
+
+            if ($response->getStatusCode() == 200) {
+                return json_decode($response->getBody()->getContents());
+            }
+
+            return false;
+
+        } catch(\Exception $e) {
+            return false;
+        }
+    }
+
     public function setFeaturedCoupon($accountUuid, $appId, $couponId, $scope = false, $otherHeaders = [])
     {
         try {
