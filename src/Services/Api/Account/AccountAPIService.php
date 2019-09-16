@@ -12,7 +12,6 @@ class AccountAPIService extends MZCAPIAPIService
     public function getApplication(Credentials $credentials, $accountUuid)
     {
         $requestUrl = $this->composeGetApplicationRequestUrl($accountUuid);
-
         return $this->httpClient->get($requestUrl, [
             'headers' => $credentials->getHeaders(),
             'auth' => $credentials->toArray()

@@ -21,10 +21,22 @@ class ApplicationAPIService extends MZCAPIAPIService
         return $this->httpClient->post($requestUrl, $this->generateOptions($credentials));
     }
 
+    public function getFeaturedCoupon(Credentials $credentials, $appId)
+    {
+        $requestUrl = $this->getEndpointRequestUrl([$appId, 'featured', 'coupons']);
+        return $this->httpClient->get($requestUrl, $this->generateOptions($credentials));
+    }
+
     public function setFeaturedLoyalty(Credentials $credentials, $appId, $loyaltyId)
     {
         $requestUrl = $this->getEndpointRequestUrl([$appId, 'featured', 'loyalty', $loyaltyId]);
         return $this->httpClient->post($requestUrl, $this->generateOptions($credentials));
+    }
+
+    public function getFeaturedLoyalty(Credentials $credentials, $appId)
+    {
+        $requestUrl = $this->getEndpointRequestUrl([$appId, 'featured', 'loyalty']);
+        return $this->httpClient->get($requestUrl, $this->generateOptions($credentials));
     }
 
     public function setCoverImage(Credentials $credentials, $appId, $file)
@@ -47,5 +59,11 @@ class ApplicationAPIService extends MZCAPIAPIService
                 ]
             ]
         ]);
+    }
+
+    public function getCoverImage(Credentials $credentials, $appId)
+    {
+        $requestUrl = $this->getEndpointRequestUrl([$appId, 'hero-image']);
+        return $this->httpClient->get($requestUrl, $this->generateOptions($credentials));
     }
 }
