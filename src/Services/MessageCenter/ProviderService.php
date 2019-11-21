@@ -21,33 +21,19 @@ class ProviderService extends ServiceBase
         $this->apiService = $service;
     }
 
-    public function getAllServices( 
+    public function getAllServices(
     	$id,
 	    $account_uuid = null,
 	    $scope = false,
-	    $otherHeaders = [],
-	    $user = null,
-	    $pass = null
+	    $otherHeaders = []
     ) {
-        if (!is_null($user) && !is_null($pass)) {
-            $response = $this->apiService->getAllServices(
-                $this->customSubAccountCredentials(
-                    $user,
-                    $pass,
-                    $account_uuid,
-                    $scope,
-                    $otherHeaders
-                )
-            );
-        } else {
             $response = $this->apiService->getAllServices(
                 $this->getSubAccountCredentials(
                     $account_uuid,
                     $scope,
                     $otherHeaders
-                )
+                ), $id
             );
-        }
 
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
@@ -64,6 +50,29 @@ class ProviderService extends ServiceBase
 	    $otherHeaders = []
     ) {
         $response = $this->apiService->addService(
+            $this->getSubAccountCredentials(
+                $account_uuid,
+                $scope,
+                $otherHeaders
+            ),
+            $id,
+            $data
+        );
+        if ($response->getStatusCode() == 200) {
+            return json_decode($response->getBody()->getContents());
+        } else {
+            return false;
+        }
+    }
+
+    public function searchService(
+        String $id,
+        array $data,
+        $account_uuid = null,
+        $scope = false,
+        $otherHeaders = []
+    ) {
+        $response = $this->apiService->searchService(
             $this->getSubAccountCredentials(
                 $account_uuid,
                 $scope,

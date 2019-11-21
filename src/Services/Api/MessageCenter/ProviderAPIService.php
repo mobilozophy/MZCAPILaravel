@@ -9,7 +9,7 @@ class ProviderAPIService extends MZCAPIAPIService
     const ENDPOINT = 'message-center/providers';
 
 
-    public function getAllServices(Credentials $credentials, String $id)
+    public function getAllServices($credentials, String $id)
     {
         $requestUrl = $this->getEndpointRequestUrl([$id, 'services']);
 
@@ -19,9 +19,21 @@ class ProviderAPIService extends MZCAPIAPIService
         );
     }
 
-    public function addService(Credentials $credentials, string $id, array $params)
+    public function addService($credentials, String $id, array $params)
     {
         $requestUrl = $this->getEndpointRequestUrl([$id, 'services']);
+
+        return $this->httpClient->post(
+            $requestUrl,
+            $this->generateOptions($credentials, [
+                'form_params' => $params
+            ])
+        );
+    }
+
+    public function searchService($credentials, String $id, array $params)
+    {
+        $requestUrl = $this->getEndpointRequestUrl([$id, 'services','search']);
 
         return $this->httpClient->post(
             $requestUrl,
