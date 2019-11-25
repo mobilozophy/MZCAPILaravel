@@ -19,6 +19,21 @@ class ProviderAPIService extends MZCAPIAPIService
         );
     }
 
+    public function getServiceById($credentials, String $provider, $service, $data = false)
+    {
+        $requestUrl = $this->getEndpointRequestUrl([$provider, 'services', $service]);
+        if ($data)
+        {
+            $requestUrl .= '?' . $data;
+        }
+
+        return $this->httpClient->get(
+            $requestUrl,
+            $this->generateOptions($credentials)
+        );
+    }
+
+
     public function addService($credentials, String $id, array $params)
     {
         $requestUrl = $this->getEndpointRequestUrl([$id, 'services']);

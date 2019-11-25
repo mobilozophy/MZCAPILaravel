@@ -42,6 +42,29 @@ class ProviderService extends ServiceBase
         }
     }
 
+    public function getServiceById(
+        $provider_id,
+        $service_id,
+        $account_uuid = null,
+        $scope = false,
+        $otherHeaders = [],
+        $data = []
+    ) {
+        $response = $this->apiService->getServiceById(
+            $this->getSubAccountCredentials(
+                $account_uuid,
+                $scope,
+                $otherHeaders
+            ), $provider_id, $service_id, $data
+        );
+
+        if ($response->getStatusCode() == 200) {
+            return json_decode($response->getBody()->getContents());
+        } else {
+            return false;
+        }
+    }
+
     public function addService(
     	String $id,
 	    array $data,
