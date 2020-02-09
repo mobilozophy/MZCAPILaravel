@@ -24,11 +24,34 @@ class SMSReportingService extends ServiceBase
     /**
      * @return mixed
      */
-    public function getSubscriptions()
+    public function getSubscriptions(
+        $account_uuid = null,
+        $scope = false,
+        $otherHeaders = [],
+        $user = null,
+        $pass = null
+    )
     {
-        $response = $this->smsReportingAPIService->getSubscriptions(
-            $this->getSubAccountCredentials()
-        );
+        if (!is_null($user) && !is_null($pass)) {
+            $response = $this->smsReportingAPIService->getSubscriptions(
+                $this->customSubAccountCredentials(
+                    $user,
+                    $pass,
+                    $account_uuid,
+                    $scope,
+                    $otherHeaders
+                )
+            );
+        } else {
+            $response = $this->smsReportingAPIService->getSubscriptions(
+                $this->getSubAccountCredentials(
+                    $account_uuid,
+                    $scope,
+                    $otherHeaders
+                )
+            );
+        }
+
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
         } else {
@@ -41,13 +64,34 @@ class SMSReportingService extends ServiceBase
      * @param string $lookupValType The type of subscription (ex. sms)
      * @return mixed
      */
-    public function getSubscriptionConfirmation($lookupVal, $lookupValType)
+    public function getSubscriptionConfirmation(
+        $lookupVal, $lookupValType,
+        $account_uuid = null,
+        $scope = false,
+        $otherHeaders = [],
+        $user = null,
+        $pass = null)
     {
-        $response = $this->smsReportingAPIService->getSubscriptionConfirmation(
-            $this->getSubAccountCredentials(),
-            $lookupVal,
-            $lookupValType
-        );
+        if (!is_null($user) && !is_null($pass)) {
+            $response = $this->smsReportingAPIService->getSubscriptionConfirmation(
+                $this->customSubAccountCredentials(
+                    $user,
+                    $pass,
+                    $account_uuid,
+                    $scope,
+                    $otherHeaders
+                ), $lookupVal, $lookupValType
+            );
+        } else {
+            $response = $this->smsReportingAPIService->getSubscriptionConfirmation(
+                $this->getSubAccountCredentials(
+                    $account_uuid,
+                    $scope,
+                    $otherHeaders
+                ), $lookupVal, $lookupValType
+            );
+        }
+
         if ($response->getStatusCode() == 200) {
             return json_decode($response->getBody()->getContents());
         } else {
