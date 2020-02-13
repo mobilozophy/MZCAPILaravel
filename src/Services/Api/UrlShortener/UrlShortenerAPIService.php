@@ -8,5 +8,17 @@ use Mobilozophy\MZCAPILaravel\Services\Api\MZCAPIAPIService;
 
 class UrlShortenerAPIService extends MZCAPIAPIService
 {
-    const ENDPOINT = 'url-shortener/domains';
+    const ENDPOINT = 'url-shortener';
+
+    public function getDomains(Credentials $credentials)
+    {
+        $requestUrl = $this->getEndpointRequestUrl(['domains']);
+
+        return $this->httpClient->get($requestUrl, [
+            'headers' => $credentials->getHeaders(),
+            'auth' => $credentials->toArray(),
+        ]);
+
+    }
+
 }

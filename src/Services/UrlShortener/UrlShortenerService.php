@@ -20,4 +20,21 @@ class UrlShortenerService extends ServiceBase
     {
         $this->apiService = $urlShortenerAPIService;
     }
+
+    public function getDomains($account_id = null, $scope = false, $otherHeaders = [])
+    {
+        $response = $this->apiService->getDomains(
+            $this->getSubAccountCredentials(
+                $account_id,
+                $scope,
+                $otherHeaders
+            )
+        );
+
+        if ($response->getStatusCode() == 200) {
+            return json_decode($response->getBody()->getContents());
+        } else {
+            return false;
+        }
+    }
 }
