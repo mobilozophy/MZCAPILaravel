@@ -240,8 +240,8 @@ class ServiceBase
         $headers = array_merge($headers, $otherHeaders);
 
         return new Credentials(
-            config('app.MZCAPI_USER'),
-            config('app.MZCAPI_PASS'),
+            env('MZCAPI_USER'),
+            env('MZCAPI_PASS'),
             $headers
         );
     }
