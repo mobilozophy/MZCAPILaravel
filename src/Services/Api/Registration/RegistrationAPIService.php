@@ -47,4 +47,17 @@ class RegistrationAPIService extends MZCAPIAPIService
             'form_params' => $params
         ]);
     }
+
+    public function twoFactorTestAndAuth(
+        Credentials $credentials,
+        array $params
+    ) {
+        $requestUrl = $this->getEndpointRequestUrl() . '/2fa';
+
+        return $this->httpClient->post($requestUrl, [
+            'headers' => $credentials->getHeaders(),
+            'auth' => $credentials->toArray(),
+            'form_params' => $params
+        ]);
+    }
 }
