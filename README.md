@@ -12,7 +12,7 @@ Edit your composer.json file to include the following:
 ```
 "require":{
     ...
-    "mobilozophy/MZCAPILaravel": "dev-master",
+    "mobilozophy/mzcapilaravel": "dev-master",
     ...
 }
 
@@ -21,7 +21,7 @@ Edit your composer.json file to include the following:
 "repositories": [
     {
         "type": "git",
-        "url": "https://bitbucket.org/mobilozophy/mzcapilaravel.git"
+        "url": "https://github.com/mobilozophy/MZCAPILaravel"
     }
 ]
 
