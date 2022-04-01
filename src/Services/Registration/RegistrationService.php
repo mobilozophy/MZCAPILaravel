@@ -83,7 +83,7 @@ class RegistrationService extends ServiceBase
         array $data,
         $account_uuid = null
     ) {
-        $response = $this->apiService->$response = $this->apiService->locateRegisteredUserByEmail(
+        $response = $this->apiService->$response = $this->apiService->twoFactorTestAndAuth(
             $this->getSubAccountCredentials($account_uuid),
             $data
         );
