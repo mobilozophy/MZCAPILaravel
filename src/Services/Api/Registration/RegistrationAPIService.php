@@ -52,7 +52,7 @@ class RegistrationAPIService extends MZCAPIAPIService
         Credentials $credentials,
         array $params
     ) {
-        $requestUrl = $this->getEndpointRequestUrl() . '/2fa';
+        $requestUrl = $this->getEndpointRequestUrl() . '/login/2fa';
 
         return $this->httpClient->post($requestUrl, [
             'headers' => $credentials->getHeaders(),
